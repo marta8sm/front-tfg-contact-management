@@ -28,13 +28,10 @@ export type ClientCreateApiParams = {
 
 export type ClientUpdateApiParams = {
     //updatedResource: Client
-    // TODO: Switch params if the api requires an id in the url for updates
     updatedResource: Omit<Client, 'clientID'>
     resourceId: ClientId
-    // TODO: Add other params here
 }
 
 export type ClientDeleteApiParams = {
     resourceId: ClientId
-    // TODO: Add other params here
 }

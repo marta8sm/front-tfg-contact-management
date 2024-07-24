@@ -36,7 +36,6 @@ export const clientApiProto = (
         const resourceIdParam =
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
 
-        // TODO: Customize the endpoint url generation here
         return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
     }
 

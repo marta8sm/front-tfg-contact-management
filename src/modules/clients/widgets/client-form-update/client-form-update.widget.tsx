@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './client-form-update.module.css'
 import { clientApi, ClientId, useClient } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
+import { LoadingButton } from '@/common/components/loading-button'
 
 export type ClientFormWidgetProps = {
     clientId: ClientId
@@ -15,8 +16,13 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
         resourceId: props.clientId,
     })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError) return <div>Error</div>
+    if (isLoading)
+        return (
+            <div id="loading_div">
+                <LoadingButton />
+            </div>
+        )
+    if (isError) return <div id="error_div">Error</div>
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()

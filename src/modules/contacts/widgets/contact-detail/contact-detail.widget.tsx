@@ -17,8 +17,8 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
         resourceId: props.id,
     })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError) return <div>Error</div>*/
+    if (isLoading) return <div id="loading_div"><LoadingButton /></div>
+    if (isError) return <div id="error_div">Error</div>*/
 
     return (
         <div data-testid="contact-detail-widget" className={styles.container}>

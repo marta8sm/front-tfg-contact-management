@@ -1,18 +1,28 @@
 import React from 'react'
 import styles from './client-detail.module.css'
 import { ClientId, useClient } from '@/clients/api/client'
+import { LoadingButton } from '@/common/components/loading-button'
+import { useRouter } from 'next/navigation'
 
 export type ClientDetailWidgetProps = {
     clientId: ClientId
 }
 
 export function ClientDetailWidget(props: ClientDetailWidgetProps) {
+    //Hook para redirigir
+    const router = useRouter()
+
     const { data, isError, isLoading } = useClient({
         resourceId: props.clientId,
     })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError) return <div>Error</div>
+    if (isLoading)
+        return (
+            <div id="loading_div">
+                <LoadingButton />
+            </div>
+        )
+    if (isError) return <div id="error_div">Error</div>
 
     return (
         <div data-testid="client-detail-widget" className={styles.container}>
@@ -39,6 +49,24 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
                         </h4>
                     </div>
                 </div>
+            </div>
+            <div className={styles.buttons}>
+                <button
+                    onClick={() =>
+                        router.push(`/clients/${data.clientID}/update-client`)
+                    }
+                    type="submit"
+                    className={styles.update_button}
+                >
+                    Update
+                </button>
+                <button
+                    onClick={() => router.push('/contacts')}
+                    type="submit"
+                    className={styles.delete_button}
+                >
+                    Delete
+                </button>
             </div>
         </div>
     )

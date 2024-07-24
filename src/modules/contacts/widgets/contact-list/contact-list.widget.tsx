@@ -8,6 +8,7 @@ import {
     TableHead,
 } from '@/common/components/ui/table'
 import { useContacts } from '@/contacts/api/contact'
+import { LoadingButton } from '@/common/components/loading-button'
 
 export type ContactListWidgetProps = {}
 /*const mock_data: ContactRowProps[] = [
@@ -100,8 +101,13 @@ export type ContactListWidgetProps = {}
 export function ContactListWidget(props: ContactListWidgetProps) {
     const { data, isError, isLoading } = useContacts({ size: 10 })
 
-    if (isLoading) return <div>Loading...</div>
-    if (isError) return <div>Error</div>
+    if (isLoading)
+        return (
+            <div id="loading_div">
+                <LoadingButton />
+            </div>
+        )
+    if (isError) return <div id="error_div">Error</div>
 
     return (
         <div data-testid="contact-list-widget" className={styles.container}>

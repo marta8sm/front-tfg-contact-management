@@ -9,6 +9,7 @@ export type ClientRowProps = {
     clientAddress?: string
     clientPhone?: string
     clientEmail: string
+    onClick: () => void
 }
 
 export function ClientRow(props: ClientRowProps) {
@@ -16,7 +17,11 @@ export function ClientRow(props: ClientRowProps) {
         props
 
     return (
-        <TableRow data-testid="client-row" className={styles.container}>
+        <TableRow
+            data-testid="client-row"
+            onClick={props.onClick}
+            className={styles.container}
+        >
             <TableCell className="p-2">
                 <AvatarRoot className="w-10 h-10">
                     <AvatarFallback className={styles.fallback}>
