@@ -1,0 +1,11 @@
+.container {
+    @apply flex items-center bg-black p-4;
+}
+
+.navbar {
+    @apply flex flex-grow justify-start items-center text-secondary space-x-12 ml-4;
+}
+
+.menu_item {
+    @apply font-semibold transition ease-in-out delay-0 hover:scale-110;
+}

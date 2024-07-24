@@ -1,0 +1,31 @@
+.container {
+    @apply bg-slate-300 pb-16 pt-16;
+}
+
+:where(.table_header) {
+    @apply bg-blue-600 text-white font-bold;
+}
+
+.title {
+    @apply flex justify-center align-middle p-12 mb-16 bg-blue-600 text-white font-bold overline text-2xl uppercase;
+}
+
+.card {
+    @apply grid grid-cols-2 rounded lg:container;
+}
+
+.attributes {
+    @apply justify-start align-middle bg-black text-white p-10 rounded;
+
+    h4 {
+        @apply p-4;
+    }
+}
+
+.name {
+    @apply flex items-center justify-center uppercase bg-blue-600 text-white font-bold text-2xl p-8 rounded;
+
+    h2 {
+        @apply text-3xl;
+    }
+}

@@ -1,0 +1,3 @@
+.container {
+    @apply flex justify-center align-middle p-12 bg-black text-white;
+}

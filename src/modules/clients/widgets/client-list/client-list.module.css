@@ -1,0 +1,15 @@
+.container {
+    @apply bg-slate-300 pb-16;
+}
+
+:where(.table_header) {
+    @apply bg-blue-600 text-white font-bold;
+}
+
+:where(.title) {
+    @apply flex justify-center align-middle p-12 pb-16 bg-slate-300 font-bold overline text-3xl;
+}
+
+:where(.table) {
+    @apply xl:container;
+}
