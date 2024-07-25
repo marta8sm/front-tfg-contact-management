@@ -1,21 +1,17 @@
 .container {
-    @apply bg-slate-300 pb-16;
+    @apply bg-slate-300 pb-16 flex flex-col items-center;
 }
 
 .table_header {
-    @apply bg-green-300 text-black font-bold;
+    @apply bg-green-300 text-black font-bold p-12 mb-16 w-full;
 }
 
 .title {
-    @apply flex justify-center align-middle p-12 mb-16 font-bold overline text-2xl uppercase;
+    @apply flex justify-center align-middle font-bold overline text-2xl uppercase;
 }
 
 .form_container {
-    @apply w-1/2 grid justify-self-center justify-center items-center rounded lg:container;
-}
-
-.field_separation {
-    @apply mb-4;
+    @apply w-full md:w-3/4 lg:w-2/5 rounded;
 }
 
 .field {
@@ -27,5 +23,9 @@
 }
 
 .form {
-    @apply w-full;
+    @apply space-y-4;
+}
+
+.submit_button {
+    @apply bg-green-500 text-white px-4 py-2 mt-2 rounded-md shadow-sm hover:bg-green-700 border focus:ring-2 focus:ring-green-900;
 }

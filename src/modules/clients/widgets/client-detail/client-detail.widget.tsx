@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './client-detail.module.css'
 import { ClientId, useClient } from '@/clients/api/client'
 import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
+import { ClientDeleteWidget } from '../client-delete'
 
 export type ClientDetailWidgetProps = {
     clientId: ClientId
@@ -16,6 +17,8 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
         resourceId: props.clientId,
     })
 
+    const [showDeleteWidget, setShowDeleteWidget] = useState(false)
+
     if (isLoading)
         return (
             <div id="loading_div">
@@ -26,6 +29,9 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
 
     return (
         <div data-testid="client-detail-widget" className={styles.container}>
+            <div className={styles.header}>
+                <h1 className={styles.title}>CLIENT INFORMATION</h1>
+            </div>
             <div className={styles.container}>
                 <div className={styles.card}>
                     <div className={styles.name}>
@@ -61,13 +67,21 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
                     Update
                 </button>
                 <button
-                    onClick={() => router.push('/contacts')}
+                    onClick={() => setShowDeleteWidget(true)}
                     type="submit"
                     className={styles.delete_button}
                 >
                     Delete
                 </button>
             </div>
+            {showDeleteWidget && (
+                <div className={styles.overlay}>
+                    <ClientDeleteWidget
+                        clientId={props.clientId}
+                        cancel={() => setShowDeleteWidget(false)}
+                    />
+                </div>
+            )}
         </div>
     )
 }

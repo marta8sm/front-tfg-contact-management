@@ -1,13 +1,13 @@
 .container {
-    @apply bg-slate-300 pb-16 pt-16;
+    @apply bg-slate-300 pb-16;
 }
 
-:where(.table_header) {
-    @apply bg-blue-600 text-white font-bold;
+.header {
+    @apply bg-blue-700 text-white font-bold;
 }
 
 .title {
-    @apply flex justify-center align-middle p-12 mb-16 bg-blue-600 text-white font-bold overline text-2xl uppercase;
+    @apply flex justify-center align-middle p-12 mb-16 font-bold overline text-2xl uppercase;
 }
 
 .card {
@@ -31,7 +31,7 @@
 }
 
 .buttons {
-    @apply flex justify-center space-x-10 p-10;
+    @apply flex justify-center space-x-10 px-10 pb-10;
 }
 
 .update_button {
@@ -40,4 +40,8 @@
 
 .delete_button {
     @apply bg-red-500 text-white px-4 py-2 rounded-md shadow-sm hover:bg-red-700 border focus:ring-2 focus:ring-red-900;
+}
+
+.overlay {
+    @apply z-50 inset-0 fixed flex justify-center items-center bg-slate-800 bg-opacity-50;
 }

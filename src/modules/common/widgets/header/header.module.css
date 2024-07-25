@@ -1,5 +1,5 @@
 .container {
-    @apply flex items-center bg-black p-4;
+    @apply w-full z-50 sticky top-0 flex items-center bg-black p-4;
 }
 
 .navbar {

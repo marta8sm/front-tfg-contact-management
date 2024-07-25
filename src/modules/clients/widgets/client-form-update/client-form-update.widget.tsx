@@ -70,7 +70,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
             </div>
             <div className={styles.form_container}>
                 <form onSubmit={submit} className={styles.form}>
-                    <div className={styles.field_separation}>
+                    <div>
                         <label id="clientName" className={styles.form_label}>
                             Name *
                         </label>
@@ -83,7 +83,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             required
                         />
                     </div>
-                    <div className={styles.field_separation}>
+                    <div>
                         <label id="clientAddress" className={styles.form_label}>
                             Address
                         </label>
@@ -95,7 +95,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             className={styles.field}
                         ></input>
                     </div>
-                    <div className={styles.field_separation}>
+                    <div>
                         <label id="clientPhone" className={styles.form_label}>
                             Phone *
                         </label>
@@ -108,7 +108,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             required
                         ></input>
                     </div>
-                    <div className={styles.field_separation}>
+                    <div>
                         <label id="clientEmail" className={styles.form_label}>
                             Email *
                         </label>
@@ -122,10 +122,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                         ></input>
                     </div>
                     <div className="text-center">
-                        <button
-                            type="submit"
-                            className="bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
+                        <button type="submit" className={styles.submit_button}>
                             Submit
                         </button>
                     </div>

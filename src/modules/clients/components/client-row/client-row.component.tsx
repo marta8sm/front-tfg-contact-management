@@ -20,10 +20,10 @@ export function ClientRow(props: ClientRowProps) {
         <TableRow
             data-testid="client-row"
             onClick={props.onClick}
-            className={styles.container}
+            className={styles.row}
         >
             <TableCell className="p-2">
-                <AvatarRoot className="w-10 h-10">
+                <AvatarRoot className={styles.avatar}>
                     <AvatarFallback className={styles.fallback}>
                         {clientName[0]}
                     </AvatarFallback>

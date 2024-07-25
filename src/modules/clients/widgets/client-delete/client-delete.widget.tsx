@@ -6,6 +6,7 @@ import { LoadingButton } from '@/common/components/loading-button'
 
 export type ClientDeleteWidgetProps = {
     clientId: ClientId
+    cancel: () => void
 }
 
 export function ClientDeleteWidget(props: ClientDeleteWidgetProps) {
@@ -41,22 +42,20 @@ export function ClientDeleteWidget(props: ClientDeleteWidgetProps) {
     return (
         <div data-testid="client-delete-widget" className={styles.container}>
             <div className={styles.delete_div}>
-                <h3>Delete client {data.clientName}?</h3>
+                <h3 className={styles.question}>
+                    Delete client {data.clientName}?
+                </h3>
             </div>
             <div className={styles.delete_buttons}>
-                <button
-                    onClick={submit}
-                    type="submit"
-                    className={styles.delete}
-                >
-                    Delete
+                <button onClick={submit} type="button" className={styles.yes}>
+                    Yes
                 </button>
                 <button
-                    onClick={() => router.push('/clients')}
-                    type="submit"
-                    className={styles.cancel}
+                    onClick={props.cancel}
+                    type="button"
+                    className={styles.no}
                 >
-                    Cancel
+                    No
                 </button>
             </div>
         </div>
