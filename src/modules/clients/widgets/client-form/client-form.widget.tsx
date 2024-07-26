@@ -1,10 +1,14 @@
 import React from 'react'
 import styles from './client-form.module.css'
 import { clientApi } from '@/clients/api/client'
+import { useRouter } from 'next/navigation'
 
 export type ClientFormWidgetProps = {}
 
 export function ClientFormWidget(props: ClientFormWidgetProps) {
+    //Hook para redirigir
+    const router = useRouter()
+
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
@@ -37,6 +41,12 @@ export function ClientFormWidget(props: ClientFormWidgetProps) {
                 clientEmail: clientEmail,
             },
         })
+    }
+
+    const cancel = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+
+        void router.push(`/clients`)
     }
 
     return (
@@ -93,9 +103,16 @@ export function ClientFormWidget(props: ClientFormWidgetProps) {
                             required
                         ></input>
                     </div>
-                    <div className="text-center">
+                    <div className={styles.buttons}>
                         <button type="submit" className={styles.submit_button}>
                             Submit
+                        </button>
+                        <button
+                            type="submit"
+                            onClick={cancel}
+                            className={styles.cancel_button}
+                        >
+                            Cancel
                         </button>
                     </div>
                 </form>

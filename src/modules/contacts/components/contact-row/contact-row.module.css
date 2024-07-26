@@ -1,2 +1,10 @@
 .container {
 }
+
+.avatar {
+    @apply w-10 h-10 uppercase;
+}
+
+.row {
+    @apply cursor-pointer;
+}

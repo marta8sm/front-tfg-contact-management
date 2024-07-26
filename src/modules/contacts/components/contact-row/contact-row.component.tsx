@@ -12,6 +12,7 @@ export type ContactRowProps = {
     contactPhone?: string
     contactEmail: string
     clientID: number
+    onClick: () => void //To click on every row of the table
 }
 
 export function ContactRow(props: ContactRowProps) {
@@ -27,9 +28,13 @@ export function ContactRow(props: ContactRowProps) {
     } = props
 
     return (
-        <TableRow data-testid="contact-row" className={styles.container}>
+        <TableRow
+            data-testid="contact-row"
+            onClick={props.onClick}
+            className={styles.row}
+        >
             <TableCell className="p-2">
-                <AvatarRoot className="w-10 h-10">
+                <AvatarRoot className={styles.avatar}>
                     <AvatarFallback className={styles.fallback}>
                         {contactName[0]}
                         {contactLastName1[0]}

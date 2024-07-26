@@ -1,20 +1,22 @@
 import React from 'react'
-import styles from './client-delete.module.css'
+import styles from './contact-delete.module.css'
 import { useRouter } from 'next/navigation'
-import { useClient, clientApi, ClientId } from '@/clients/api/client'
+import { useContact, contactApi, ContactId } from '@/contacts/api/contact'
 import { LoadingButton } from '@/common/components/loading-button'
 
-export type ClientDeleteWidgetProps = {
-    clientId: ClientId
+export type ContactDeleteWidgetProps = {
+    contactId: ContactId
+    clientId: number
     cancel: () => void
 }
 
-export function ClientDeleteWidget(props: ClientDeleteWidgetProps) {
+export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
     //Hook para redirigir
     const router = useRouter()
 
-    const { data, isError, isLoading } = useClient({
-        resourceId: props.clientId,
+    const { data, isError, isLoading } = useContact({
+        resourceId: props.contactId,
+        clientId: props.clientId,
     })
 
     if (isLoading)
@@ -30,34 +32,30 @@ export function ClientDeleteWidget(props: ClientDeleteWidgetProps) {
     ) => {
         event.preventDefault()
 
-        const success = await clientApi.delete({
-            resourceId: props.clientId,
+        const success = await contactApi.delete({
+            resourceId: props.contactId,
         })
 
         if (success) {
-            void router.push(`/clients`)
+            void router.push(`/contacts`)
         }
     }
 
     return (
-        <div data-testid="client-delete-widget" className={styles.container}>
+        <div data-testid="contact-delete-widget" className={styles.container}>
             <div className={styles.delete_div}>
                 <h3 className={styles.question}>
-                    Delete client {data.clientName}?
+                    Delete contact {data.contactName}?
                 </h3>
             </div>
             <div className={styles.delete_buttons}>
-                <button
-                    onClick={submit}
-                    type="button"
-                    className={styles.yes_button}
-                >
+                <button onClick={submit} type="button" className={styles.yes}>
                     Yes
                 </button>
                 <button
                     onClick={props.cancel}
                     type="button"
-                    className={styles.no_button}
+                    className={styles.no}
                 >
                     No
                 </button>

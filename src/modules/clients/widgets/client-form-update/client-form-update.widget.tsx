@@ -63,6 +63,12 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
         }
     }
 
+    const cancel = async (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+
+        void router.push(`/clients/${props.clientId}`)
+    }
+
     return (
         <div data-testid="client-form-widget" className={styles.container}>
             <div className={styles.table_header}>
@@ -79,7 +85,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             id="clientName"
                             name="clientName"
                             defaultValue={data.clientName}
-                            className={styles.field}
+                            className={`${styles.field} capitalize`}
                             required
                         />
                     </div>
@@ -92,7 +98,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             id="clientAddress"
                             name="clientAddress"
                             defaultValue={data.clientAddress}
-                            className={styles.field}
+                            className={`${styles.field} capitalize`}
                         ></input>
                     </div>
                     <div>
@@ -121,9 +127,16 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
                             required
                         ></input>
                     </div>
-                    <div className="text-center">
+                    <div className={styles.buttons}>
                         <button type="submit" className={styles.submit_button}>
                             Submit
+                        </button>
+                        <button
+                            type="submit"
+                            onClick={cancel}
+                            className={styles.cancel_button}
+                        >
+                            Cancel
                         </button>
                     </div>
                 </form>

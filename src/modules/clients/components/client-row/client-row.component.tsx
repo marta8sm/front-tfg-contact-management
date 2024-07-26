@@ -9,7 +9,7 @@ export type ClientRowProps = {
     clientAddress?: string
     clientPhone?: string
     clientEmail: string
-    onClick: () => void
+    onClick: () => void //To click on every row of the table
 }
 
 export function ClientRow(props: ClientRowProps) {

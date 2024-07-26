@@ -15,8 +15,12 @@ export const contactApiProto = (
     defaultApiContext = DEFAULT_API_CONTEXT
 ) => {
     const endpointUrl = `${baseUrl}/contacts`
+    const endpointUrlClient = `${baseUrl}/clients`
+    const endpointContact = `/contacts`
+    //Preguntar
+    const endpointAdminUrl = `${baseUrl}/admin/clients`
 
-    type UrlParams = { resourceId?: ContactId }
+    type UrlParams = { resourceId?: ContactId; clientId?: number }
     const endpoint = (
         urlParams: UrlParams,
         queryParams: Record<string, string>
@@ -25,8 +29,29 @@ export const contactApiProto = (
         const resourceIdParam =
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
 
-        // TODO: Customize the endpoint url generation here
         return `${endpointUrl}${resourceIdParam}?${queryParamString}`
+    }
+    const endpointAdmin = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const resourceIdParam =
+            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+
+        return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
+    }
+    const endpointClient = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const resourceIdParam =
+            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+        const clientIdParam =
+            urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
+
+        return `${endpointUrlClient}${clientIdParam}${endpointContact}${resourceIdParam}?${queryParamString}`
     }
 
     return {
@@ -59,7 +84,7 @@ export const contactApiProto = (
             { resourceId, ...queryParams }: ContactDeleteApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = { resourceId }
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Deleting Contact with id:`,
                 resourceId,
@@ -68,16 +93,14 @@ export const contactApiProto = (
 
             const response = await this.client.delete(url)
 
-            // TODO: Add code handle the response if needed
-
             return response.status >= 200 && response.status < 300
         },
         async create(
             this: ApiContext,
             { newResource, ...queryParams }: ContactCreateApiParams
-        ): Promise<ContactId> {
+        ): Promise<boolean> {
             const urlParams: UrlParams = {}
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Creating Contact resource:`,
                 newResource,
@@ -85,38 +108,20 @@ export const contactApiProto = (
             )
             const response = await this.client.post(url, newResource)
 
-            // TODO: Add code handle the response if needed
-
-            // TODO: Adapt code to handle the receiving of the resourceId (if any)
-            const locationHeader = response.headers.location as
-                | string
-                | undefined
-
-            if (locationHeader) {
-                const segments = new URL(locationHeader).pathname.split('/')
-                const lastIdx = segments.length - 1
-                const resourceId =
-                    segments[lastIdx] || segments[Math.max(lastIdx - 1, 0)]
-                if (!resourceId)
-                    console.warn(new Error('Invalid location header received'))
-                return resourceId as ContactId
-            }
-
-            console.warn(new Error('No location header received'))
-            return '' as ContactId
+            return response.status >= 200 && response.status < 300
         },
         async update(
             this: ApiContext,
             {
                 updatedResource,
-                // resourceId,
+                resourceId,
                 ...queryParams
             }: ContactUpdateApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = {
-                // resourceId
+                resourceId,
             }
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `updating Contact resource:`,
                 updatedResource,
@@ -124,18 +129,17 @@ export const contactApiProto = (
             )
             const response = await this.client.put(url, updatedResource)
 
-            // TODO: Add code handle the response if needed
-
             return response.status >= 200 && response.status < 300
         },
         async get(
             this: ApiContext,
-            { resourceId, ...queryParams }: ContactGetApiParams
+            { resourceId, clientId, ...queryParams }: ContactGetApiParams
         ): Promise<ContactApiResult> {
             const urlParams: UrlParams = {
                 resourceId,
+                clientId,
             }
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointClient(urlParams, queryParams)
             console.debug(
                 `Getting Contact with id:`,
                 resourceId,

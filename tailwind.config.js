@@ -37,9 +37,9 @@ module.exports = {
                 sm: 'calc(0.5rem - 4px)',
             },
             fontFamily: {
-                sans: ['var(--font-sans, Lexend)', ...fontFamily.sans],
+                //sans: ['var(--font-sans, Lexend)', ...fontFamily.sans],
                 //sans: ['var(--font-sans, Titillium Web)', ...fontFamily.sans],
-                //sans: ['var(--font-sans, Teko)', ...fontFamily.sans],
+                sans: ['var(--font-sans, Teko)', ...fontFamily.sans],
             },
             variables: {
                 DEFAULT: {

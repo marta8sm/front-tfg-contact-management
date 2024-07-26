@@ -78,8 +78,6 @@ export const clientApiProto = (
 
             const response = await this.client.delete(url)
 
-            // TODO: Add code handle the response if needed
-
             return response.status >= 200 && response.status < 300
         },
         async create(
@@ -116,8 +114,6 @@ export const clientApiProto = (
                 `on url: ${url}`
             )
             const response = await this.client.put(url, updatedResource)
-
-            // TODO: Add code handle the response if needed
 
             return response.status >= 200 && response.status < 300
         },
