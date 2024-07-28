@@ -33,24 +33,54 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: 'custom-credentials',
             credentials: {
-                email: { type: 'email' },
-                password: { type: 'password' },
+                employeeEmail: { type: 'email' },
+                employeePassword: { type: 'password' },
             },
             authorize: async (credentials, _req) => {
-                // TODO: Connect with login API in the backend
+                /*console.log('Sending credentials:', {
+                    email: credentials?.email,
+                    password: credentials?.password,
+                })*/
+                const response = await fetch(
+                    'http://localhost:8080/contact-management/v1/auth/login',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            employeeEmail: credentials?.employeeEmail,
+                            employeePassword: credentials?.employeePassword,
+                        }),
+                    }
+                )
+
+                if (!response.ok) return null
+
+                type ResponseBody = {
+                    token: string
+                }
+
+                const response_body = (await response.json()) as ResponseBody
+
+                type JWTPayload = {
+                    sub: string
+                }
+                const token_payload = JSON.parse(
+                    atob(response_body.token.split('.')[1])
+                ) as JWTPayload
+
                 const user: User = {
-                    id: '1',
-                    email: 'dpenai@pibone.com',
-                    name: 'Dani Peña Iglesias',
-                    role: 'admin',
-                    // TODO: Set the incoming api token here, if needed
+                    id: token_payload.sub,
+                    name: token_payload.sub,
                     apiSession: {
-                        accessToken: 'jwt-token',
-                        // refreshToken: 'refresh-token-if-any',
+                        accessToken: response_body.token,
                     },
                 }
 
-                return credentials?.password === 'safe-password' ? user : null
+                return user
+
+                //return credentials?.password === 'safe-password' ? user : null
             },
         }),
     ],

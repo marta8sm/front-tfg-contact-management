@@ -2,17 +2,14 @@ import { ApiSession, DefaultSession } from 'next-auth'
 import { DefaultJWT } from 'next-auth/jwt'
 
 declare module 'next-auth' {
-    declare type Role = 'user' | 'admin'
+    //declare type Role = 'user' | 'admin'
     declare interface ApiSession {
         accessToken: string
         refreshToken?: string
     }
     declare interface User {
         id: string
-        role: Role
-        image?: string
-        name?: string
-        email?: string
+        name: string
         apiSession?: ApiSession
     }
 

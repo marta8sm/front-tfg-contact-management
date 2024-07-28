@@ -4,7 +4,10 @@ import { LoadingButton } from '@/common/components/loading-button'
 import * as Form from '@/common/components/ui/form'
 import { z } from 'zod'
 
-export type AuthFormCredentials = { username: string; password: string }
+export type AuthFormCredentials = {
+    employeeEmail: string
+    employeePassword: string
+}
 export type AuthFormProps = Omit<
     React.HTMLAttributes<HTMLDivElement>,
     'onSubmit'
@@ -16,13 +19,13 @@ export function AuthForm({ className, onSubmit, ...props }: AuthFormProps) {
     const form = Form.useZodForm<AuthFormCredentials>({
         criteriaMode: 'firstError',
         schema: z.object({
-            username: z
+            employeeEmail: z
                 .string()
                 .min(2, {
-                    message: 'Username must be at least 2 characters',
+                    message: 'Email must be at least 2 characters',
                 })
                 .max(50),
-            password: z.string().min(8, {
+            employeePassword: z.string().min(1, {
                 message: 'Password must contain at least 8 characters',
             }),
         }),
@@ -55,7 +58,7 @@ export function AuthForm({ className, onSubmit, ...props }: AuthFormProps) {
                 <div className="grid gap-2">
                     <Form.Field
                         control={form.control}
-                        name="username"
+                        name="employeeEmail"
                         render={({ field }) => (
                             <Form.Item>
                                 <Form.Label>Username</Form.Label>
@@ -66,7 +69,7 @@ export function AuthForm({ className, onSubmit, ...props }: AuthFormProps) {
                     />
                     <Form.Field
                         control={form.control}
-                        name="password"
+                        name="employeePassword"
                         render={({ field }) => (
                             <Form.Item>
                                 <Form.Label>Password</Form.Label>
