@@ -1,3 +1,6 @@
 .container {
+}
 
+.fallback {
+    @apply bg-white text-black;
 }

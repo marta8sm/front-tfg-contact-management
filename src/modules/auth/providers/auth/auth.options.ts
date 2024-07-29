@@ -1,5 +1,5 @@
 import { getApiContext } from '@/common/providers/api-context/api-context.default'
-import { AuthOptions, User } from 'next-auth'
+import { AuthOptions, Role, role, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: AuthOptions = {
@@ -18,6 +18,7 @@ export const authOptions: AuthOptions = {
                     accessToken: token.accessToken,
                     refreshToken: token.refreshToken,
                 }
+                session.user = token.user
             }
             return session
         },
@@ -47,6 +48,7 @@ export const authOptions: AuthOptions = {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
+                            //meter aqui para roles
                         },
                         body: JSON.stringify({
                             employeeEmail: credentials?.employeeEmail,
@@ -65,6 +67,7 @@ export const authOptions: AuthOptions = {
 
                 type JWTPayload = {
                     sub: string
+                    role: Role
                 }
                 const token_payload = JSON.parse(
                     atob(response_body.token.split('.')[1])
@@ -73,6 +76,7 @@ export const authOptions: AuthOptions = {
                 const user: User = {
                     id: token_payload.sub,
                     name: token_payload.sub,
+                    roleId: token_payload.role,
                     apiSession: {
                         accessToken: response_body.token,
                     },

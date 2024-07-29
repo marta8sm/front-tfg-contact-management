@@ -38,10 +38,10 @@ function LoggedInUser() {
             <Popover.Trigger asChild className="cursor-pointer">
                 <Avatar.Root>
                     <Avatar.Image src={session?.user?.image ?? undefined} />
-                    <Avatar.Fallback>
+                    <Avatar.Fallback className={styles.fallback}>
                         {(session?.user?.name ?? '')
                             .split(/\s+/)
-                            .map((v) => v[0].toUpperCase())
+                            .map((v) => v[0]?.toUpperCase())
                             .join('') || 'Unknown user'}
                     </Avatar.Fallback>
                 </Avatar.Root>
