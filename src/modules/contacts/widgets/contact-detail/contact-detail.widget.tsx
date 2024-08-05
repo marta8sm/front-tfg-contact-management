@@ -4,10 +4,11 @@ import { ContactId, useContact } from '@/contacts/api/contact'
 import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ContactDeleteWidget } from '../contact-delete'
+import { ClientId } from '@/clients/api/client'
 
 export type ContactDetailWidgetProps = {
     contactId: ContactId
-    clientId: number
+    clientId: ClientId
 }
 
 export function ContactDetailWidget(props: ContactDetailWidgetProps) {
