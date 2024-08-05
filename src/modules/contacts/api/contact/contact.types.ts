@@ -13,6 +13,8 @@ export type Contact = {
 
 export type ContactId = number
 
+export type ClientId = number
+
 export type ContactApiResult = Contact
 
 export type ContactPaginatedApiResult = Contact[]
@@ -20,6 +22,7 @@ export type ContactPaginatedApiResult = Contact[]
 export type ContactListApiParams = Pagination.UsePaginatedQueryParams<{
     name?: string
     lastname1?: string
+    clientId?: ClientId
 }>
 
 export type ContactGetApiParams = {

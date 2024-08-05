@@ -1,6 +1,7 @@
 import type { Pagination } from '@/hookey'
 
 export type Client = {
+    map(arg0: (contact: any) => JSX.Element): import('react').ReactNode
     clientID: ClientId
     clientName: string
     clientAddress: string

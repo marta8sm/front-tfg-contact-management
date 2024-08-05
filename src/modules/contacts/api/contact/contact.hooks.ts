@@ -12,6 +12,14 @@ export const useContacts = Pagination.makePaginationHook({
     getPageData: (data) => data,
 })
 
+export const useContactsOfClient = Pagination.makePaginationHook({
+    cacheKey: 'contact-of-client-api-list',
+    clientFn: contactApi.listByClient,
+    useApiContext: useApiContext,
+    getCount: (data) => data.length,
+    getPageData: (data) => data,
+})
+
 export const useContact = (params: ContactGetApiParams) => {
     return useQuery(
         ['contact-api-get', params] as [string, typeof params],

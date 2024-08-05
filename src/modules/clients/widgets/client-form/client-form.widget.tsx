@@ -41,6 +41,10 @@ export function ClientFormWidget(props: ClientFormWidgetProps) {
                 clientEmail: clientEmail,
             },
         })
+
+        if (success) {
+            void router.push(`/clients`)
+        }
     }
 
     const cancel = async (event: React.MouseEvent<HTMLButtonElement>) => {
