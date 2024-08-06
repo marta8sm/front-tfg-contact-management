@@ -131,9 +131,9 @@ export const contactApiProto = (
         },
         async create(
             this: ApiContext,
-            { newResource, ...queryParams }: ContactCreateApiParams
+            { newResource, clientId, ...queryParams }: ContactCreateApiParams
         ): Promise<boolean> {
-            const urlParams: UrlParams = {}
+            const urlParams: UrlParams = { clientId }
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Creating Contact resource:`,

@@ -31,7 +31,8 @@ export type ContactGetApiParams = {
 }
 
 export type ContactCreateApiParams = {
-    newResource: Omit<Contact, 'contactId'>
+    newResource: Omit<Omit<Contact, 'contactId'>, 'clientId'>
+    clientId: ClientId
 }
 
 export type ContactUpdateApiParams = {
