@@ -59,6 +59,15 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
             <div className={styles.buttons}>
                 <button
                     onClick={() =>
+                        router.push(`/clients/${data.clientID}/contacts`)
+                    }
+                    type="submit"
+                    className={styles.contacts_button}
+                >
+                    See contacts
+                </button>
+                <button
+                    onClick={() =>
                         router.push(`/clients/${data.clientID}/update-client`)
                     }
                     type="submit"

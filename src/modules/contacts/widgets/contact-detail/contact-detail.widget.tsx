@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import styles from './contact-detail.module.css'
-import { ContactId, useContact } from '@/contacts/api/contact'
+import { ClientId, ContactId, useContact } from '@/contacts/api/contact'
 import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ContactDeleteWidget } from '../contact-delete'
-import { ClientId } from '@/clients/api/client'
 
 export type ContactDetailWidgetProps = {
     contactId: ContactId
@@ -75,7 +74,21 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
                 <button
                     onClick={() =>
                         //cambiar cuando se haga
-                        router.push(`/clients/${data.clientID}/update-contact`)
+                        router.push(
+                            `/clients/${data.clientID}/contacts/${data.contactID}/update-contact`
+                        )
+                    }
+                    type="submit"
+                    className={styles.meetings_button}
+                >
+                    See meetings
+                </button>
+                <button
+                    onClick={() =>
+                        //cambiar cuando se haga
+                        router.push(
+                            `/clients/${data.clientID}/contacts/${data.contactID}/update-contact`
+                        )
                     }
                     type="submit"
                     className={styles.update_button}

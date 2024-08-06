@@ -36,8 +36,10 @@ export const contactApiProto = (
         const queryParamString = new URLSearchParams(queryParams).toString()
         const resourceIdParam =
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+        const clientIdParam =
+            urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
 
-        return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
+        return `${endpointAdminUrl}${clientIdParam}/contacts${resourceIdParam}?${queryParamString}`
     }
     const endpointContact = (
         urlParams: UrlParams,
@@ -147,11 +149,13 @@ export const contactApiProto = (
             {
                 updatedResource,
                 resourceId,
+                clientId,
                 ...queryParams
             }: ContactUpdateApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = {
                 resourceId,
+                clientId,
             }
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(

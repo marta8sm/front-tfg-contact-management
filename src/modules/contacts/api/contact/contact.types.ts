@@ -5,7 +5,7 @@ export type Contact = {
     contactDNI: number
     contactName: string
     contactLastName1: string
-    contactLastName2: string
+    contactLastName2?: string
     contactPhone: string
     contactEmail: string
     clientID: number
@@ -27,7 +27,7 @@ export type ContactListApiParams = Pagination.UsePaginatedQueryParams<{
 
 export type ContactGetApiParams = {
     resourceId: ContactId
-    clientId: number
+    clientId: ClientId
 }
 
 export type ContactCreateApiParams = {
@@ -38,6 +38,7 @@ export type ContactUpdateApiParams = {
     //updatedResource: Contact
     updatedResource: Omit<Contact, 'contactId'>
     resourceId: ContactId
+    clientId: ClientId
 }
 
 export type ContactDeleteApiParams = {
