@@ -11,6 +11,7 @@ import { useContactsOfClient } from '@/contacts/api/contact'
 import { useRouter } from 'next/navigation'
 import { LoadingButton } from '@/common/components/loading-button'
 import { ClientId } from '@/clients/api/client'
+import { useSession } from 'next-auth/react'
 
 export type ContactListOfClientWidgetProps = {
     clientId: ClientId
@@ -59,6 +60,10 @@ export function ContactListOfClientWidget(
     //Hook para redirigir
     const router = useRouter()
 
+    //Control de role
+    const { data: session } = useSession()
+    const isAdmin = session?.user?.roleId === 1
+
     const { clientId } = props
 
     const { data, isError, isLoading } = useContactsOfClient({
@@ -77,21 +82,25 @@ export function ContactListOfClientWidget(
     return (
         <div data-testid="contact-list-widget" className={styles.container}>
             <div className={styles.title}>
-                <h1>CONTACTS OF {clientId}</h1>
+                <h1>CONTACTS OF CLIENT {clientId}</h1>
             </div>
-            <div className={styles.buttons}>
-                <button
-                    onClick={() =>
-                        router.push(
-                            `/clients/${clientId}/contacts/post-new-contact`
-                        )
-                    }
-                    type="submit"
-                    className={styles.create_button}
-                >
-                    Create contact
-                </button>
-            </div>
+            {isAdmin && (
+                <>
+                    <div className={styles.buttons}>
+                        <button
+                            onClick={() =>
+                                router.push(
+                                    `/clients/${clientId}/contacts/post-new-contact`
+                                )
+                            }
+                            type="submit"
+                            className={styles.create_button}
+                        >
+                            Create contact
+                        </button>
+                    </div>
+                </>
+            )}
             <div>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>

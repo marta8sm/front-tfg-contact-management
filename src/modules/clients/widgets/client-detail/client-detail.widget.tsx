@@ -4,6 +4,7 @@ import { ClientId, useClient } from '@/clients/api/client'
 import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ClientDeleteWidget } from '../client-delete'
+import { useSession } from 'next-auth/react'
 
 export type ClientDetailWidgetProps = {
     clientId: ClientId
@@ -12,6 +13,10 @@ export type ClientDetailWidgetProps = {
 export function ClientDetailWidget(props: ClientDetailWidgetProps) {
     //Hook para redirigir
     const router = useRouter()
+
+    //Control de role
+    const { data: session } = useSession()
+    const isAdmin = session?.user?.roleId === 1
 
     const { data, isError, isLoading } = useClient({
         resourceId: props.clientId,
@@ -66,33 +71,39 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
                 >
                     See contacts
                 </button>
-                <button
-                    onClick={() =>
-                        router.push(
-                            `/clients/${data.clientID}/contacts/post-new-contact`
-                        )
-                    }
-                    type="submit"
-                    className={styles.create_button}
-                >
-                    Create contact
-                </button>
-                <button
-                    onClick={() =>
-                        router.push(`/clients/${data.clientID}/update-client`)
-                    }
-                    type="submit"
-                    className={styles.update_button}
-                >
-                    Update
-                </button>
-                <button
-                    onClick={() => setShowDeleteWidget(true)}
-                    type="submit"
-                    className={styles.delete_button}
-                >
-                    Delete
-                </button>
+                {isAdmin && (
+                    <>
+                        <button
+                            onClick={() =>
+                                router.push(
+                                    `/clients/${data.clientID}/contacts/post-new-contact`
+                                )
+                            }
+                            type="submit"
+                            className={styles.create_button}
+                        >
+                            Create contact
+                        </button>
+                        <button
+                            onClick={() =>
+                                router.push(
+                                    `/clients/${data.clientID}/update-client`
+                                )
+                            }
+                            type="submit"
+                            className={styles.update_button}
+                        >
+                            Update
+                        </button>
+                        <button
+                            onClick={() => setShowDeleteWidget(true)}
+                            type="submit"
+                            className={styles.delete_button}
+                        >
+                            Delete
+                        </button>
+                    </>
+                )}
             </div>
             {showDeleteWidget && (
                 <div className={styles.overlay}>

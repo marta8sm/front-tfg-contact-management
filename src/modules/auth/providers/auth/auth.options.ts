@@ -19,6 +19,7 @@ export const authOptions: AuthOptions = {
                     refreshToken: token.refreshToken,
                 }
                 session.user = token.user
+                session.user.roleId = token.user.roleId
             }
             return session
         },
@@ -26,6 +27,7 @@ export const authOptions: AuthOptions = {
             if (user?.apiSession) {
                 token.accessToken = user.apiSession.accessToken
                 token.refreshToken = user.apiSession.refreshToken
+                token.user = user
             }
             return token
         },

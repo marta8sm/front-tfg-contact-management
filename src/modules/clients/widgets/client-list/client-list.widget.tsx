@@ -10,12 +10,17 @@ import {
 import { useClients } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
 import { LoadingButton } from '@/common/components/loading-button'
+import { useSession } from 'next-auth/react'
 
 export type ClientListWidgetProps = {}
 
 export function ClientListWidget(props: ClientListWidgetProps) {
     //Hook para redirigir
     const router = useRouter()
+
+    //Control de role
+    const { data: session } = useSession()
+    const isAdmin = session?.user?.roleId === 1
 
     const { data, isError, isLoading } = useClients({ size: 10 })
 
@@ -32,6 +37,21 @@ export function ClientListWidget(props: ClientListWidgetProps) {
             <div className={styles.title}>
                 <h1>CLIENTS</h1>
             </div>
+            {isAdmin && (
+                <>
+                    <div className={styles.buttons}>
+                        <button
+                            onClick={() =>
+                                router.push(`/clients/post-new-client`)
+                            }
+                            type="submit"
+                            className={styles.create_button}
+                        >
+                            Create new client
+                        </button>
+                    </div>
+                </>
+            )}
             <div>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>
