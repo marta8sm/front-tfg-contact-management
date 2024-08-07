@@ -79,6 +79,19 @@ export function ContactListOfClientWidget(
             <div className={styles.title}>
                 <h1>CONTACTS OF {clientId}</h1>
             </div>
+            <div className={styles.buttons}>
+                <button
+                    onClick={() =>
+                        router.push(
+                            `/clients/${clientId}/contacts/post-new-contact`
+                        )
+                    }
+                    type="submit"
+                    className={styles.create_button}
+                >
+                    Create contact
+                </button>
+            </div>
             <div>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>
