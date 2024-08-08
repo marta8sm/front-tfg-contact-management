@@ -1,1 +1,1 @@
-export { ClientView as default } from '@/clients/views/client'
+export { HomeView as default } from '@/home/views/home'

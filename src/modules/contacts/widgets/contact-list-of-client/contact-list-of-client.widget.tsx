@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { LoadingButton } from '@/common/components/loading-button'
 import { ClientId } from '@/clients/api/client'
 import { useSession } from 'next-auth/react'
+import Link from 'next/link'
 
 export type ContactListOfClientWidgetProps = {
     clientId: ClientId
@@ -84,9 +85,16 @@ export function ContactListOfClientWidget(
             <div className={styles.title}>
                 <h1>CONTACTS OF CLIENT {clientId}</h1>
             </div>
-            {isAdmin && (
-                <>
-                    <div className={styles.buttons}>
+            <div className={styles.buttons}>
+                <button
+                    onClick={() => router.back()}
+                    type="button"
+                    className={styles.goback_button}
+                >
+                    &lt;&lt; GO BACK
+                </button>
+                {isAdmin && (
+                    <>
                         <button
                             onClick={() =>
                                 router.push(
@@ -98,9 +106,9 @@ export function ContactListOfClientWidget(
                         >
                             Create contact
                         </button>
-                    </div>
-                </>
-            )}
+                    </>
+                )}
+            </div>
             <div>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>

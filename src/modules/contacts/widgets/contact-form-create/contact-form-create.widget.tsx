@@ -64,7 +64,7 @@ export function ContactFormCreateWidget(props: ContactFormCreateWidgetProps) {
     const cancel = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
 
-        void router.push(`/clients/${props.clientId}/contacts`)
+        void router.back()
     }
     return (
         <div
@@ -158,7 +158,7 @@ export function ContactFormCreateWidget(props: ContactFormCreateWidgetProps) {
                             Submit
                         </button>
                         <button
-                            type="submit"
+                            type="button"
                             onClick={cancel}
                             className={styles.cancel_button}
                         >
