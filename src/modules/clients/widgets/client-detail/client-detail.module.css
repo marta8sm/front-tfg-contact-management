@@ -1,5 +1,5 @@
 .container {
-    @apply bg-slate-300 pb-16;
+    @apply min-h-screen bg-gradient-to-br from-white via-gray-300 to-white pb-16;
 }
 
 .header {
@@ -8,6 +8,10 @@
 
 .title {
     @apply flex justify-center align-middle p-12 mb-16 font-bold overline text-2xl uppercase;
+}
+
+.card_container {
+    @apply pb-16;
 }
 
 .card {
@@ -23,31 +27,27 @@
 }
 
 .name {
-    @apply flex items-center justify-center uppercase bg-blue-600 text-white font-bold text-2xl p-8 rounded;
-
-    h2 {
-        @apply text-3xl;
-    }
+    @apply flex flex-col items-center justify-center uppercase bg-blue-600 text-white font-bold text-4xl p-8 rounded;
 }
 
 .buttons {
-    @apply flex justify-center space-x-10 px-14 pb-10;
-}
-
-.contacts_button {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
+    @apply flex justify-center font-semibold space-x-10 px-14 pb-10;
 }
 
 .create_button {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+    @apply bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 border focus:ring-2 focus:ring-blue-900;
 }
 
-.update_button {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500;
+.contacts_button {
+    @apply bg-green-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700 border focus:ring-2 focus:ring-green-900;
 }
 
 .delete_button {
-    @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500;
+    @apply bg-red-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-red-700 border focus:ring-2 focus:ring-red-900;
+}
+
+.update_button {
+    @apply bg-orange-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-orange-700 border focus:ring-2 focus:ring-orange-900;
 }
 
 .overlay {

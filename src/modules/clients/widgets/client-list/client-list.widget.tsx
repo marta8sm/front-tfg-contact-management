@@ -9,7 +9,6 @@ import {
 } from '@/common/components/ui/table'
 import { useClients } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
-import { LoadingButton } from '@/common/components/loading-button'
 import { useSession } from 'next-auth/react'
 
 export type ClientListWidgetProps = {}

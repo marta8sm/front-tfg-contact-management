@@ -1,5 +1,5 @@
 .container {
-    @apply min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-300 to-white pb-40;
+    @apply min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-white via-gray-300 to-white pb-40;
 }
 
 .header {

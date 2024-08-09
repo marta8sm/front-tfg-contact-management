@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './contact-detail.module.css'
 import { ClientId, ContactId, useContact } from '@/contacts/api/contact'
-import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ContactDeleteWidget } from '../contact-delete'
 import { useSession } from 'next-auth/react'
@@ -34,7 +33,7 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
             <div className={styles.header}>
                 <h1 className={styles.title}>CONTACT INFORMATION</h1>
             </div>
-            <div className={styles.container}>
+            <div className={styles.card_container}>
                 <div className={styles.card}>
                     <div className={styles.name}>
                         <h2>{data.contactName}</h2>

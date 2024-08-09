@@ -15,7 +15,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                         src="/logo-white.png"
                         alt="Logo"
                         width={90}
-                        height={30}
+                        height={42}
                     />
                 </Link>
             </div>

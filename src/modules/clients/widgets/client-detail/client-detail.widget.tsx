@@ -32,7 +32,7 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
             <div className={styles.header}>
                 <h1 className={styles.title}>CLIENT INFORMATION</h1>
             </div>
-            <div className={styles.container}>
+            <div className={styles.card_container}>
                 <div className={styles.card}>
                     <div className={styles.name}>
                         <h2>{data.clientName}</h2>
