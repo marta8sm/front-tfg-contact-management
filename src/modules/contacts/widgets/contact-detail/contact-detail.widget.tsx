@@ -4,6 +4,7 @@ import { ClientId, ContactId, useContact } from '@/contacts/api/contact'
 import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ContactDeleteWidget } from '../contact-delete'
+import { useSession } from 'next-auth/react'
 
 export type ContactDetailWidgetProps = {
     contactId: ContactId
@@ -13,6 +14,10 @@ export type ContactDetailWidgetProps = {
 export function ContactDetailWidget(props: ContactDetailWidgetProps) {
     //Hook para redirigir
     const router = useRouter()
+
+    //Control de role
+    const { data: session } = useSession()
+    const isAdmin = session?.user?.roleId === 1
 
     const { data, isError, isLoading } = useContact({
         resourceId: props.contactId,
@@ -83,25 +88,28 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
                 >
                     See meetings
                 </button>
-                <button
-                    onClick={() =>
-                        //cambiar cuando se haga
-                        router.push(
-                            `/clients/${data.clientID}/contacts/${data.contactID}/update-contact`
-                        )
-                    }
-                    type="submit"
-                    className={styles.update_button}
-                >
-                    Update
-                </button>
-                <button
-                    onClick={() => setShowDeleteWidget(true)}
-                    type="submit"
-                    className={styles.delete_button}
-                >
-                    Delete
-                </button>
+                {isAdmin && (
+                    <>
+                        <button
+                            onClick={() =>
+                                router.push(
+                                    `/clients/${data.clientID}/contacts/${data.contactID}/update-contact`
+                                )
+                            }
+                            type="submit"
+                            className={styles.update_button}
+                        >
+                            Update
+                        </button>
+                        <button
+                            onClick={() => setShowDeleteWidget(true)}
+                            type="submit"
+                            className={styles.delete_button}
+                        >
+                            Delete
+                        </button>
+                    </>
+                )}
             </div>
             {showDeleteWidget && (
                 <div className={styles.overlay}>

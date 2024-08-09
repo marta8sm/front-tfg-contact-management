@@ -34,10 +34,11 @@ export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
 
         const success = await contactApi.delete({
             resourceId: props.contactId,
+            clientId: props.clientId,
         })
 
         if (success) {
-            void router.push(`/contacts`)
+            void router.back()
         }
     }
 

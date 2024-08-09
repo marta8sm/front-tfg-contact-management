@@ -44,4 +44,5 @@ export type ContactUpdateApiParams = {
 
 export type ContactDeleteApiParams = {
     resourceId: ContactId
+    clientId: ClientId
 }

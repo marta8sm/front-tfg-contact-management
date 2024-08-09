@@ -115,9 +115,12 @@ export const contactApiProto = (
         },
         async delete(
             this: ApiContext,
-            { resourceId, ...queryParams }: ContactDeleteApiParams
+            { resourceId, clientId, ...queryParams }: ContactDeleteApiParams
         ): Promise<boolean> {
-            const urlParams: UrlParams = { resourceId }
+            const urlParams: UrlParams = {
+                resourceId,
+                clientId,
+            }
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Deleting Contact with id:`,
