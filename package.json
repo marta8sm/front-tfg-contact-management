@@ -15,8 +15,14 @@
         "prepare": "husky install"
     },
     "dependencies": {
-        "@types/leaflet": "^1.9.3",
+        "@fontsource/lexend": "^5.0.20",
+        "@fontsource/play": "^5.0.20",
+        "@fontsource/roboto": "^5.0.14",
+        "@fontsource/strait": "^5.0.20",
+        "@fontsource/teko": "^5.0.20",
+        "@fontsource/titillium-web": "^5.0.20",
         "@tanstack/react-query": "^4.29.12",
+        "@types/leaflet": "^1.9.3",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
         "leaflet": "^1.9.4",

@@ -56,12 +56,7 @@ export function ContactListWidget(props: ContactListWidgetProps) {
 
     const { data, isError, isLoading } = useContacts({ size: 10 })
 
-    if (isLoading)
-        return (
-            <div id="loading_div">
-                <LoadingButton />
-            </div>
-        )
+    if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
 
     return (

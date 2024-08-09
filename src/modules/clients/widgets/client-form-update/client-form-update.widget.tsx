@@ -16,12 +16,7 @@ export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
         resourceId: props.clientId,
     })
 
-    if (isLoading)
-        return (
-            <div id="loading_div">
-                <LoadingButton />
-            </div>
-        )
+    if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {

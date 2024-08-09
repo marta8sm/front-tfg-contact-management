@@ -26,12 +26,7 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
 
     const [showDeleteWidget, setShowDeleteWidget] = useState(false)
 
-    if (isLoading)
-        return (
-            <div id="loading_div">
-                <LoadingButton />
-            </div>
-        )
+    if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
 
     return (

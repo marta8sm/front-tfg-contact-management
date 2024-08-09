@@ -38,8 +38,12 @@ module.exports = {
             },
             fontFamily: {
                 //sans: ['var(--font-sans, Lexend)', ...fontFamily.sans],
-                //sans: ['var(--font-sans, Titillium Web)', ...fontFamily.sans],
-                sans: ['var(--font-sans, Teko)', ...fontFamily.sans],
+                lexend: ['Lexend', ...fontFamily.sans],
+                titillium: ['Titillium Web', ...fontFamily.sans],
+                teko: ['Teko', ...fontFamily.sans],
+                sans: ['Play', ...fontFamily.sans],
+                roboto: ['Roboto', ...fontFamily.sans],
+                strait: ['Strait', ...fontFamily.sans],
             },
             variables: {
                 DEFAULT: {

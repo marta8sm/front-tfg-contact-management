@@ -1,5 +1,5 @@
 .container {
-    @apply bg-slate-300 pb-16;
+    @apply min-h-screen bg-gradient-to-br from-gray-300 to-white pb-16;
 }
 
 .header {

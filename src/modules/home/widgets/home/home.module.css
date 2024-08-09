@@ -1,9 +1,21 @@
 .container {
-    @apply min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-gray-300;
+    @apply min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-300 to-white pb-40;
+}
+
+.header {
+    @apply flex flex-row align-middle items-center justify-center p-12;
+}
+
+.title {
+    @apply flex flex-row justify-center align-middle px-8 font-semibold text-3xl;
+}
+
+.logo {
+    @apply border-b-4 border-blue-700 rounded-lg;
 }
 
 .card_container {
-    @apply grid grid-cols-2 gap-x-40 gap-y-20;
+    @apply grid grid-cols-2 gap-x-40 gap-y-20 pt-10;
 }
 
 .card {

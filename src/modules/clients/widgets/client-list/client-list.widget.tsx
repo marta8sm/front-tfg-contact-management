@@ -24,12 +24,7 @@ export function ClientListWidget(props: ClientListWidgetProps) {
 
     const { data, isError, isLoading } = useClients({ size: 10 })
 
-    if (isLoading)
-        return (
-            <div id="loading_div">
-                <LoadingButton />
-            </div>
-        )
+    if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
 
     return (

@@ -72,12 +72,7 @@ export function ContactListOfClientWidget(
         clientId,
     })
 
-    if (isLoading)
-        return (
-            <div id="loading_div">
-                <LoadingButton />
-            </div>
-        )
+    if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
 
     return (
