@@ -11,10 +11,10 @@ export type ContactDetailWidgetProps = {
 }
 
 export function ContactDetailWidget(props: ContactDetailWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
-    //Control de role
+    //Role control
     const { data: session } = useSession()
     const isAdmin = session?.user?.roleId === 1
 

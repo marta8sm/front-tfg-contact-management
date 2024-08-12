@@ -10,13 +10,15 @@ export function HomeWidget(props: HomeWidgetProps) {
         <div data-testid="home-widget" className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.title}>Welcome to</h1>
-                <Image
-                    className={styles.logo}
-                    src="/logo-long-black.png"
-                    alt="Logo"
-                    width={258}
-                    height={67}
-                />
+                <Link href="https://www.axpe.com/" target="_blank">
+                    <Image
+                        className={styles.logo}
+                        src="/logo-long-black.png"
+                        alt="Logo"
+                        width={258}
+                        height={67}
+                    />
+                </Link>
                 <h1 className={styles.title}>
                     contact management application!
                 </h1>

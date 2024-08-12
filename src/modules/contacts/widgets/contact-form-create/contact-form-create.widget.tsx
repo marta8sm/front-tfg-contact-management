@@ -8,7 +8,7 @@ export type ContactFormCreateWidgetProps = {
 }
 
 export function ContactFormCreateWidget(props: ContactFormCreateWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {

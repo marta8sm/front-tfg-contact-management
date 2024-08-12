@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './contact-list.module.css'
 import { ContactRow } from '@/contacts/components/contact-row'
 import {
@@ -9,7 +9,6 @@ import {
 } from '@/common/components/ui/table'
 import { useContacts } from '@/contacts/api/contact'
 import { useRouter } from 'next/navigation'
-import { LoadingButton } from '@/common/components/loading-button'
 
 export type ContactListWidgetProps = {}
 /*const mock_data: ContactRowProps[] = [
@@ -51,20 +50,49 @@ export type ContactListWidgetProps = {}
 ]*/
 
 export function ContactListWidget(props: ContactListWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
-    const { data, isError, isLoading } = useContacts({ size: 10 })
+    const [searchParam, setSearchParam] = useState('')
+    const [queryParam, setQueryParam] = useState('')
+
+    const { data, isError, isLoading } = useContacts({
+        size: 10,
+        name: queryParam,
+        lastname1: queryParam,
+    })
 
     if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
+
+    const filterNameLastname = data.filter((contact) => {
+        const searchWords = searchParam.toLowerCase().split(' ')
+
+        return searchWords.every(
+            (word) =>
+                contact.contactName.toLowerCase().includes(word) ||
+                contact.contactLastName1.toLowerCase().includes(word)
+        )
+    })
 
     return (
         <div data-testid="contact-list-widget" className={styles.container}>
             <div className={styles.title}>
                 <h1>CONTACTS</h1>
             </div>
-            <div>
+
+            <div className={styles.buttons}>
+                <form className={styles.search_form}>
+                    <input
+                        type="text"
+                        placeholder="Search by name or lastname"
+                        value={searchParam}
+                        onChange={(e) => setSearchParam(e.target.value)}
+                        className={styles.search_bar}
+                    />
+                </form>
+            </div>
+            <div className={styles.table_container}>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>
                         <tr className={styles.table_header}>
@@ -80,7 +108,7 @@ export function ContactListWidget(props: ContactListWidgetProps) {
                         </tr>
                     </TableHeader>
                     <TableBody>
-                        {data.map((contact) => (
+                        {filterNameLastname.map((contact) => (
                             <ContactRow
                                 key={contact.contactID}
                                 {...contact}

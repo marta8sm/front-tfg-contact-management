@@ -15,7 +15,7 @@ export type ContactFormWidgetProps = {
 }
 
 export function ContactFormUpdateWidget(props: ContactFormWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const { data, isError, isLoading } = useContact({

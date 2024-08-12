@@ -9,7 +9,7 @@ export type ClientFormWidgetProps = {
 }
 
 export function ClientFormUpdateWidget(props: ClientFormWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const { data, isError, isLoading } = useClient({

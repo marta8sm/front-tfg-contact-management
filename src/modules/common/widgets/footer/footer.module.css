@@ -29,3 +29,7 @@
 .rights {
     @apply mt-4 sm:mt-6 flex flex-col justify-center align-middle items-center text-white text-sm font-light;
 }
+
+.menu_routes {
+    @apply text-white hover:underline hover:underline-offset-4;
+}

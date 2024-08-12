@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 export type ClientFormWidgetProps = {}
 
 export function ClientFormWidget(props: ClientFormWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {

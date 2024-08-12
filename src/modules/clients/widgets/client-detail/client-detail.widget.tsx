@@ -10,10 +10,10 @@ export type ClientDetailWidgetProps = {
 }
 
 export function ClientDetailWidget(props: ClientDetailWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
-    //Control de role
+    //Role control
     const { data: session } = useSession()
     const isAdmin = session?.user?.roleId === 1
 

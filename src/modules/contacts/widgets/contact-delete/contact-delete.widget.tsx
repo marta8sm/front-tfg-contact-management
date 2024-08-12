@@ -11,7 +11,7 @@ export type ContactDeleteWidgetProps = {
 }
 
 export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const { data, isError, isLoading } = useContact({

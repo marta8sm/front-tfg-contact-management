@@ -10,7 +10,7 @@ export type ClientDeleteWidgetProps = {
 }
 
 export function ClientDeleteWidget(props: ClientDeleteWidgetProps) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
     const { data, isError, isLoading } = useClient({

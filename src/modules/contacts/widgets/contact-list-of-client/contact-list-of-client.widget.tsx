@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './contact-list-of-client.module.css'
 import { ContactRow } from '@/contacts/components/contact-row'
 import {
@@ -58,22 +58,37 @@ export type ContactListOfClientWidgetProps = {
 export function ContactListOfClientWidget(
     props: ContactListOfClientWidgetProps
 ) {
-    //Hook para redirigir
+    //Hook to redirect
     const router = useRouter()
 
-    //Control de role
+    //Role control
     const { data: session } = useSession()
     const isAdmin = session?.user?.roleId === 1
+
+    const [searchParam, setSearchParam] = useState('')
+    const [queryParam, setQueryParam] = useState('')
 
     const { clientId } = props
 
     const { data, isError, isLoading } = useContactsOfClient({
         size: 10,
         clientId,
+        name: queryParam,
+        lastname1: queryParam,
     })
 
     if (isLoading) return <div id="loading_div">Loading...</div>
     if (isError) return <div id="error_div">Error</div>
+
+    const filterNameLastname = data.filter((contact) => {
+        const searchWords = searchParam.toLowerCase().split(' ')
+
+        return searchWords.every(
+            (word) =>
+                contact.contactName.toLowerCase().includes(word) ||
+                contact.contactLastName1.toLowerCase().includes(word)
+        )
+    })
 
     return (
         <div data-testid="contact-list-widget" className={styles.container}>
@@ -86,7 +101,7 @@ export function ContactListOfClientWidget(
                     type="button"
                     className={styles.goback_button}
                 >
-                    &lt;&lt; GO BACK
+                    &lt;&lt; Go back
                 </button>
                 {isAdmin && (
                     <>
@@ -103,8 +118,17 @@ export function ContactListOfClientWidget(
                         </button>
                     </>
                 )}
+                <form className={styles.search_form}>
+                    <input
+                        type="text"
+                        placeholder="Search by name or lastname"
+                        value={searchParam}
+                        onChange={(e) => setSearchParam(e.target.value)}
+                        className={styles.search_bar}
+                    />
+                </form>
             </div>
-            <div>
+            <div className={styles.table_container}>
                 <TableRoot className={styles.table}>
                     <TableHeader className={styles.table_header}>
                         <tr className={styles.table_header}>
@@ -120,7 +144,7 @@ export function ContactListOfClientWidget(
                         </tr>
                     </TableHeader>
                     <TableBody>
-                        {data.map((contact) => (
+                        {filterNameLastname.map((contact) => (
                             <ContactRow
                                 key={contact.contactID}
                                 {...contact}

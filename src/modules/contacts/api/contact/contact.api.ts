@@ -75,6 +75,7 @@ export const contactApiProto = (
                 //size: `${size}`,
                 limit: `${size}`,
                 offset: `${Math.max((page - 1) * size, 0)}`,
+                name,
                 ...otherQueryParams,
             }
             const url = endpoint(urlParams, queryParams)
@@ -99,6 +100,7 @@ export const contactApiProto = (
                 //size: `${size}`,
                 limit: `${size}`,
                 offset: `${Math.max((page - 1) * size, 0)}`,
+                name,
                 ...otherQueryParams,
             }
             const url = endpointContactsOfClient(urlParams, queryParams)
