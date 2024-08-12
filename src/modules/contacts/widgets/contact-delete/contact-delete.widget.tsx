@@ -41,7 +41,7 @@ export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
         <div data-testid="contact-delete-widget" className={styles.container}>
             <div className={styles.delete_div}>
                 <h3 className={styles.question}>
-                    Delete contact {data.contactName}?
+                    Delete contact {data.contactName} {data.contactLastName1}?
                 </h3>
             </div>
             <div className={styles.delete_buttons}>

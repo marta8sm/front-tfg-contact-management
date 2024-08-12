@@ -50,6 +50,7 @@ export const clientApiProto = (
                 //size: `${size}`,
                 limit: `${size}`,
                 offset: `${Math.max((page - 1) * size, 0)}`,
+                name,
                 ...otherQueryParams,
             }
             const url = endpoint(urlParams, queryParams)

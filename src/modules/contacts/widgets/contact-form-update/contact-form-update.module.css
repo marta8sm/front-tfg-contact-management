@@ -1,5 +1,5 @@
 .container {
-    @apply mx-auto p-8 bg-gradient-to-br from-white to-gray-300 shadow-lg min-h-screen;
+    @apply mx-auto p-8 bg-gradient-to-br from-white via-gray-300 to-white shadow-lg min-h-screen;
 }
 
 .table_header {

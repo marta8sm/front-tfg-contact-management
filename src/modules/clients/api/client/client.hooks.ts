@@ -2,11 +2,12 @@ import { useQuery } from '@tanstack/react-query'
 import { Pagination } from '@/hookey'
 import { useApiContext } from '@/common/providers/api-context'
 import { clientApi } from './client.api'
-import { ClientGetApiParams } from './client.types'
+import { ClientGetApiParams, ClientListApiParams } from './client.types'
 
 export const useClients = Pagination.makePaginationHook({
     cacheKey: 'client-api-list',
-    clientFn: clientApi.list,
+    //clientFn: clientApi.list,
+    clientFn: (params: ClientListApiParams) => clientApi.list(params),
     useApiContext: useApiContext,
     getCount: (data) => data.length,
     getPageData: (data) => data,

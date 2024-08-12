@@ -1,5 +1,5 @@
 .container {
-    @apply w-auto text-center justify-center justify-self-center rounded-md shadow-sm border-2 border-red-500 bg-slate-300 py-6 px-16;
+    @apply w-auto text-center justify-center justify-self-center rounded-md shadow-sm border-2 border-red-500 bg-white py-6 px-16;
 }
 
 .delete_buttons {

@@ -11,13 +11,17 @@
 }
 
 .table {
-    @apply xl:container;
+    @apply shadow-md xl:container;
 }
 
 .buttons {
-    @apply flex justify-start space-x-10 px-14 pb-10 xl:container;
+    @apply flex justify-between space-x-10 px-14 pb-10 xl:container;
 }
 
 .create_button {
-    @apply bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 border focus:ring-2 focus:ring-blue-900;
+    @apply bg-blue-500 text-white justify-start px-4 py-2 rounded-md shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-900;
+}
+
+.search_bar {
+    @apply bg-white text-black justify-end px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
 }

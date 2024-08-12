@@ -11,7 +11,7 @@
 }
 
 .table {
-    @apply xl:container;
+    @apply shadow-md xl:container;
 }
 
 .buttons {

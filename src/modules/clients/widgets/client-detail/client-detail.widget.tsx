@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './client-detail.module.css'
 import { ClientId, useClient } from '@/clients/api/client'
-import { LoadingButton } from '@/common/components/loading-button'
 import { useRouter } from 'next/navigation'
 import { ClientDeleteWidget } from '../client-delete'
 import { useSession } from 'next-auth/react'
