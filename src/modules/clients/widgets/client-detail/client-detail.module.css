@@ -35,19 +35,19 @@
 }
 
 .create_button {
-    @apply bg-blue-500 w-full max-w-40 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-blue-700 border focus:ring-2 focus:ring-blue-900;
+    @apply bg-blue-500 w-full max-w-44 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-blue-700 border focus:ring-2 focus:ring-blue-900;
 }
 
 .contacts_button {
-    @apply bg-green-500 w-full max-w-40 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-green-700 border focus:ring-2 focus:ring-green-900;
+    @apply bg-green-500 w-full max-w-44 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-green-700 border focus:ring-2 focus:ring-green-900;
 }
 
 .delete_button {
-    @apply bg-red-500 w-full max-w-40 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-red-700 border focus:ring-2 focus:ring-red-900;
+    @apply bg-red-500 w-full max-w-44 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-red-700 border focus:ring-2 focus:ring-red-900;
 }
 
 .update_button {
-    @apply bg-orange-500 w-full max-w-40 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-orange-700 border focus:ring-2 focus:ring-orange-900;
+    @apply bg-orange-500 w-full max-w-44 text-white px-4 py-2 mb-4 rounded-md shadow-md hover:bg-orange-700 border focus:ring-2 focus:ring-orange-900;
 }
 
 .overlay {

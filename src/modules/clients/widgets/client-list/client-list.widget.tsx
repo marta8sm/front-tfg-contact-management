@@ -60,7 +60,7 @@ export function ClientListWidget(props: ClientListWidgetProps) {
                         </button>
                     </>
                 )}
-                <form onSubmit={handleSearch}>
+                <form className={styles.search_form} onSubmit={handleSearch}>
                     <input
                         type="text"
                         placeholder="Search by name"
