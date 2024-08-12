@@ -1,3 +1,31 @@
 .container {
-    @apply flex justify-center align-middle p-12 bg-black text-white;
+    @apply w-full grid grid-cols-1 gap-4 justify-between sm:grid-cols-2 items-center bg-black border-t-4 border-blue-700 p-8 font-titillium;
+}
+
+.navbar {
+    @apply order-1 flex flex-col justify-center align-middle items-center content-center text-white space-y-4 mx-4;
+}
+
+.logo {
+    @apply order-2 flex flex-col justify-center align-middle items-center mt-8 sm:mt-0;
+}
+
+.image_size_big {
+    @apply hidden sm:flex sm:justify-end;
+}
+
+.image_size_small {
+    @apply sm:hidden justify-center;
+}
+
+.mobile_menu {
+    @apply absolute flex flex-col items-center justify-center align-middle text-white my-8 sm:my-12;
+}
+
+.mobile_menu_item {
+    @apply text-white bg-black w-full text-xl font-semibold mb-6 hover:underline;
+}
+
+.rights {
+    @apply mt-4 sm:mt-6 flex flex-col justify-center align-middle items-center text-white text-sm font-light;
 }

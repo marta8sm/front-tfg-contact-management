@@ -23,7 +23,7 @@
 }
 
 .mobile_menu {
-    @apply absolute flex flex-col items-start top-full left-0 h-auto w-3/5 bg-black p-6 shadow-lg z-50 bg-opacity-100;
+    @apply absolute flex flex-col items-start top-full left-0 h-auto w-2/5 bg-black p-6 shadow-lg z-50 bg-opacity-80;
 }
 
 .mobile_menu_open {

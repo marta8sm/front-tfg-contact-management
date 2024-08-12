@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './header.module.css'
 import { AccountWidget } from '@/auth/widgets/account'
 import Link from 'next/link'
@@ -9,10 +9,33 @@ export type HeaderWidgetProps = {}
 export function HeaderWidget(props: HeaderWidgetProps) {
     const [openMenu, setOpenMenu] = useState(false)
 
+    const menuRef = useRef<HTMLDivElement>(null)
+
     //Control of the state of the mobile menu
     const mobileMenu = () => {
         setOpenMenu(!openMenu)
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target as Node)
+            ) {
+                setOpenMenu(false)
+            }
+        }
+
+        if (openMenu) {
+            document.addEventListener('click', handleClickOutside)
+        } else {
+            document.removeEventListener('click', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, [openMenu])
 
     return (
         <div data-testid="header-widget" className={styles.container}>
@@ -74,29 +97,48 @@ export function HeaderWidget(props: HeaderWidgetProps) {
             </button>
             {openMenu && (
                 <div
+                    ref={menuRef}
                     className={`${styles.mobile_menu} ${styles.mobile_menu_open}`}
                 >
                     <div className={styles.mobile_menu_item}>
-                        <Link href="/clients">
+                        <Link
+                            href="/clients"
+                            onClick={() => setOpenMenu(false)}
+                        >
                             <h3>CLIENTS</h3>
                         </Link>
                     </div>
                     <div className={styles.mobile_menu_item}>
-                        <Link href="/contacts">
+                        <Link
+                            href="/contacts"
+                            onClick={() => setOpenMenu(false)}
+                        >
                             <h3>CONTACTS</h3>
                         </Link>
                     </div>
-                    <div className={styles.mobile_menu_item}>
-                        <Link href="/employees">
+                    <div
+                        className={styles.mobile_menu_item}
+                        onClick={() => setOpenMenu(false)}
+                    >
+                        <Link
+                            href="/employees"
+                            onClick={() => setOpenMenu(false)}
+                        >
                             <h3>EMPLOYEES</h3>
                         </Link>
                     </div>
-                    <div className={styles.mobile_menu_item}>
+                    <div
+                        className={styles.mobile_menu_item}
+                        onClick={() => setOpenMenu(false)}
+                    >
                         <Link href="/meetings">
                             <h3>MEETINGS</h3>
                         </Link>
                     </div>
-                    <div className={styles.mobile_menu_item}>
+                    <div
+                        className={styles.mobile_menu_item}
+                        onClick={() => setOpenMenu(false)}
+                    >
                         <Link href="/roles">
                             <h3>ROLES</h3>
                         </Link>

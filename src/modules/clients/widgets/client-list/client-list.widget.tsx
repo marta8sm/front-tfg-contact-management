@@ -43,8 +43,8 @@ export function ClientListWidget(props: ClientListWidgetProps) {
 
     return (
         <div data-testid="client-list-widget" className={styles.container}>
-            <div className={styles.title}>
-                <h1>CLIENTS</h1>
+            <div className={styles.header}>
+                <h1 className={styles.title}>CLIENTS</h1>
             </div>
             <div className={styles.buttons}>
                 {isAdmin && (
