@@ -105,7 +105,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                             href="/clients"
                             onClick={() => setOpenMenu(false)}
                         >
-                            <h3>CLIENTS</h3>
+                            <h3 className={styles.mobile_links}>CLIENTS</h3>
                         </Link>
                     </div>
                     <div className={styles.mobile_menu_item}>
@@ -113,7 +113,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                             href="/contacts"
                             onClick={() => setOpenMenu(false)}
                         >
-                            <h3>CONTACTS</h3>
+                            <h3 className={styles.mobile_links}>CONTACTS</h3>
                         </Link>
                     </div>
                     <div
@@ -124,7 +124,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                             href="/employees"
                             onClick={() => setOpenMenu(false)}
                         >
-                            <h3>EMPLOYEES</h3>
+                            <h3 className={styles.mobile_links}>EMPLOYEES</h3>
                         </Link>
                     </div>
                     <div
@@ -132,7 +132,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                         onClick={() => setOpenMenu(false)}
                     >
                         <Link href="/meetings">
-                            <h3>MEETINGS</h3>
+                            <h3 className={styles.mobile_links}>MEETINGS</h3>
                         </Link>
                     </div>
                     <div
@@ -140,7 +140,7 @@ export function HeaderWidget(props: HeaderWidgetProps) {
                         onClick={() => setOpenMenu(false)}
                     >
                         <Link href="/roles">
-                            <h3>ROLES</h3>
+                            <h3 className={styles.mobile_links}>ROLES</h3>
                         </Link>
                     </div>
                 </div>

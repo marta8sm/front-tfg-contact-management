@@ -7,7 +7,7 @@
 }
 
 .table_container {
-    @apply container;
+    @apply mx-8 sm:mx-auto flex justify-center sm:container;
 }
 
 .table_header {
@@ -15,7 +15,7 @@
 }
 
 .table {
-    @apply shadow-md mx-8 sm:container;
+    @apply w-full shadow-md justify-center;
 }
 
 .buttons {

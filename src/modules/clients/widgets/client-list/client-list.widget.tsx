@@ -29,7 +29,17 @@ export function ClientListWidget(props: ClientListWidgetProps) {
         name: queryName,
     })
 
-    if (isLoading) return <div id="loading_div">Loading...</div>
+    if (isLoading)
+        return (
+            <div id="loading_div" className={styles.loading}>
+                <svg
+                    className="animate-spin h-5 w-5 mr-3 ..."
+                    viewBox="0 0 24 24"
+                >
+                    Loading...
+                </svg>
+            </div>
+        )
     if (isError) return <div id="error_div">Error</div>
 
     const filterName = data.filter((client) =>
