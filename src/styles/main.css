@@ -13,6 +13,38 @@
 @import '@fontsource/roboto';
 @import '@fontsource/strait';
 
-#loading_div {
-    @apply grid justify-center;
+#loading_div,
+#error_div {
+    @apply min-h-screen bg-gradient-to-br from-white via-gray-300 to-white text-3xl font-semibold;
+}
+
+#loader {
+    width: 50px;
+    padding: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #1d4ed8;
+    --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+    animation: l3 1s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@keyframes l3 {
+    to {
+        transform: translate(-50%, -50%) rotate(1turn);
+    }
+}
+
+#error {
+    @apply w-auto text-center flex items-center justify-center rounded-md shadow-sm border-2 border-red-500 bg-gradient-to-br from-red-300 to-red-100 py-10 px-16;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -31,16 +31,23 @@ export function ClientListWidget(props: ClientListWidgetProps) {
 
     if (isLoading)
         return (
-            <div id="loading_div" className={styles.loading}>
-                <svg
-                    className="animate-spin h-5 w-5 mr-3 ..."
-                    viewBox="0 0 24 24"
-                >
-                    Loading...
-                </svg>
+            <div id="loading_div">
+                <div id="loader">
+                    <svg
+                        className="animate-spin h-5 w-5 mr-3 ..."
+                        viewBox="0 0 24 24"
+                    ></svg>
+                </div>
             </div>
         )
-    if (isError) return <div id="error_div">Error</div>
+    if (isError)
+        return (
+            <div id="error_div">
+                <div id="error">
+                    <h3 className={styles.question}>Error</h3>
+                </div>
+            </div>
+        )
 
     const filterName = data.filter((client) =>
         client.clientName.toLowerCase().includes(searchName.toLowerCase())

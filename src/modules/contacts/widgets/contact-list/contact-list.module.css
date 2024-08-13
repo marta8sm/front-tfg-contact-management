@@ -23,7 +23,7 @@
 }
 
 .search_bar {
-    @apply bg-white text-black w-60 sm:w-80 justify-end px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
+    @apply bg-white text-black text-center sm:text-start w-60 sm:w-80 justify-end px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
 }
 
 .search.form {

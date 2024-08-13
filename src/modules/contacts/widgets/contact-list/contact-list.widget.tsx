@@ -62,8 +62,25 @@ export function ContactListWidget(props: ContactListWidgetProps) {
         lastname1: queryParam,
     })
 
-    if (isLoading) return <div id="loading_div">Loading...</div>
-    if (isError) return <div id="error_div">Error</div>
+    if (isLoading)
+        return (
+            <div id="loading_div">
+                <div id="loader">
+                    <svg
+                        className="animate-spin h-5 w-5 mr-3 ..."
+                        viewBox="0 0 24 24"
+                    ></svg>
+                </div>
+            </div>
+        )
+    if (isError)
+        return (
+            <div id="error_div">
+                <div id="error">
+                    <h3 className={styles.question}>Error</h3>
+                </div>
+            </div>
+        )
 
     const filterNameLastname = data.filter((contact) => {
         const searchWords = searchParam.toLowerCase().split(' ')
