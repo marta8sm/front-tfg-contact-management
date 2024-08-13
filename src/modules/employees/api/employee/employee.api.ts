@@ -1,25 +1,23 @@
 import { ApiContext, DEFAULT_API_CONTEXT } from '@/common/providers/api-context'
 import {
-    ClientId,
-    ContactApiResult,
-    ContactCreateApiParams,
-    ContactDeleteApiParams,
-    ContactGetApiParams,
-    ContactId,
-    ContactListApiParams,
-    ContactPaginatedApiResult,
-    ContactUpdateApiParams,
-} from './contact.types'
+    EmployeeApiResult,
+    EmployeeCreateApiParams,
+    EmployeeDeleteApiParams,
+    EmployeeGetApiParams,
+    EmployeeId,
+    EmployeeListApiParams,
+    EmployeePaginatedApiResult,
+    EmployeeUpdateApiParams,
+} from './employee.types'
 
-export const contactApiProto = (
+export const employeeApiProto = (
     baseUrl: string = process.env.NEXT_PUBLIC_API_ENDPOINT || '',
     defaultApiContext = DEFAULT_API_CONTEXT
 ) => {
-    const endpointUrl = `${baseUrl}/contacts`
-    const endpointUrlClient = `${baseUrl}/clients`
-    const endpointAdminUrl = `${baseUrl}/admin/clients`
+    const endpointUrl = `${baseUrl}/employees`
+    const endpointAdminUrl = `${baseUrl}/admin/employees`
 
-    type UrlParams = { resourceId?: ContactId; clientId?: number }
+    type UrlParams = { resourceId?: EmployeeId }
     const endpoint = (
         urlParams: UrlParams,
         queryParams: Record<string, string>
@@ -28,6 +26,16 @@ export const contactApiProto = (
 
         return `${endpointUrl}?${queryParamString}`
     }
+    const endpointEmployee = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const resourceIdParam =
+            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+
+        return `${endpointUrl}${resourceIdParam}?${queryParamString}`
+    }
     const endpointAdmin = (
         urlParams: UrlParams,
         queryParams: Record<string, string>
@@ -35,39 +43,15 @@ export const contactApiProto = (
         const queryParamString = new URLSearchParams(queryParams).toString()
         const resourceIdParam =
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
-        const clientIdParam =
-            urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
 
-        return `${endpointAdminUrl}${clientIdParam}/contacts${resourceIdParam}?${queryParamString}`
-    }
-    const endpointContact = (
-        urlParams: UrlParams,
-        queryParams: Record<string, string>
-    ) => {
-        const queryParamString = new URLSearchParams(queryParams).toString()
-        const resourceIdParam =
-            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
-        const clientIdParam =
-            urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
-
-        return `${endpointUrlClient}${clientIdParam}/contacts${resourceIdParam}?${queryParamString}`
-    }
-    const endpointContactsOfClient = (
-        urlParams: UrlParams,
-        queryParams: Record<string, string>
-    ) => {
-        const queryParamString = new URLSearchParams(queryParams).toString()
-        const clientIdParam =
-            urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
-
-        return `${endpointUrlClient}${clientIdParam}/contacts?${queryParamString}`
+        return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
     }
 
     return {
         async list(
             this: ApiContext,
-            { page, size, ...otherQueryParams }: ContactListApiParams
-        ): Promise<ContactPaginatedApiResult> {
+            { page, size, ...otherQueryParams }: EmployeeListApiParams
+        ): Promise<EmployeePaginatedApiResult> {
             const urlParams: UrlParams = {}
             const queryParams = {
                 //page: `${page}`,
@@ -79,7 +63,7 @@ export const contactApiProto = (
             }
             const url = endpoint(urlParams, queryParams)
             console.debug(
-                `Listing Contact with page: ${page}, size: ${size}`,
+                `Listing Employee with page: ${page}, size: ${size}`,
                 `on url: ${url}`
             )
 
@@ -87,44 +71,16 @@ export const contactApiProto = (
 
             // TODO: Add code handle the response if needed
 
-            return response.data as ContactPaginatedApiResult
-        },
-        async listByClient(
-            this: ApiContext,
-            { page, size, clientId, ...otherQueryParams }: ContactListApiParams
-        ): Promise<ContactPaginatedApiResult> {
-            const urlParams: UrlParams = { clientId }
-            const queryParams = {
-                //page: `${page}`,
-                //size: `${size}`,
-                limit: `${size}`,
-                offset: `${Math.max((page - 1) * size, 0)}`,
-                name,
-                ...otherQueryParams,
-            }
-            const url = endpointContactsOfClient(urlParams, queryParams)
-            console.debug(
-                `Listing Contact with page: ${page}, size: ${size}`,
-                `on url: ${url}`
-            )
-
-            const response = await this.client.get(url)
-
-            // TODO: Add code handle the response if needed
-
-            return response.data as ContactPaginatedApiResult
+            return response.data as EmployeePaginatedApiResult
         },
         async delete(
             this: ApiContext,
-            { resourceId, clientId, ...queryParams }: ContactDeleteApiParams
+            { resourceId, ...queryParams }: EmployeeDeleteApiParams
         ): Promise<boolean> {
-            const urlParams: UrlParams = {
-                resourceId,
-                clientId,
-            }
+            const urlParams: UrlParams = { resourceId }
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(
-                `Deleting Contact with id:`,
+                `Deleting Employee with id:`,
                 resourceId,
                 `on url: ${url}`
             )
@@ -135,12 +91,12 @@ export const contactApiProto = (
         },
         async create(
             this: ApiContext,
-            { newResource, clientId, ...queryParams }: ContactCreateApiParams
+            { newResource, ...queryParams }: EmployeeCreateApiParams
         ): Promise<boolean> {
-            const urlParams: UrlParams = { clientId }
+            const urlParams: UrlParams = {}
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(
-                `Creating Contact resource:`,
+                `Creating Employee resource:`,
                 newResource,
                 `on url: ${url}`
             )
@@ -153,17 +109,15 @@ export const contactApiProto = (
             {
                 updatedResource,
                 resourceId,
-                clientId,
                 ...queryParams
-            }: ContactUpdateApiParams
+            }: EmployeeUpdateApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = {
                 resourceId,
-                clientId,
             }
             const url = endpointAdmin(urlParams, queryParams)
             console.debug(
-                `updating Contact resource:`,
+                `updating Employee resource:`,
                 updatedResource,
                 `on url: ${url}`
             )
@@ -173,15 +127,14 @@ export const contactApiProto = (
         },
         async get(
             this: ApiContext,
-            { resourceId, clientId, ...queryParams }: ContactGetApiParams
-        ): Promise<ContactApiResult> {
+            { resourceId, ...queryParams }: EmployeeGetApiParams
+        ): Promise<EmployeeApiResult> {
             const urlParams: UrlParams = {
                 resourceId,
-                clientId,
             }
-            const url = endpointContact(urlParams, queryParams)
+            const url = endpointEmployee(urlParams, queryParams)
             console.debug(
-                `Getting Contact with id:`,
+                `Getting Employee with id:`,
                 resourceId,
                 `on url: ${url}`
             )
@@ -190,10 +143,10 @@ export const contactApiProto = (
 
             // TODO: Add code handle the response if needed
 
-            return response.data as ContactApiResult
+            return response.data as EmployeeApiResult
         },
         ...defaultApiContext,
     }
 }
 
-export const contactApi = contactApiProto()
+export const employeeApi = employeeApiProto()
