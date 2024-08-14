@@ -1,46 +1,34 @@
 import type { Pagination } from '@/hookey'
 
 export type Role = {
-    roleId: RoleId
+    roleID: RoleId
+    roleName: string
+    roleDescription?: string
 }
 
-// TODO: Set the id type
-export type RoleId = string | number
+export type RoleId = number
 
-export type RoleApiResult = {
-    // TODO: Replace with actual get api result
-    results: Role
-}
+export type RoleApiResult = Role
 
-export type RolePaginatedApiResult = {
-    // TODO: Replace with actual list api result
-    results: Role[]
-    count: number
-}
+export type RolePaginatedApiResult = Role[]
 
 export type RoleListApiParams = Pagination.UsePaginatedQueryParams<{
-    // TODO: Add other params here
+    name?: string
 }>
 
 export type RoleGetApiParams = {
     resourceId: RoleId
-    // TODO: Add other params here
 }
 
 export type RoleCreateApiParams = {
     newResource: Omit<Role, 'roleId'>
-    // TODO: Add other params here
 }
 
 export type RoleUpdateApiParams = {
-    updatedResource: Role
-    // TODO: Switch params if the api requires an id in the url for updates
-    // updatedResource: Omit<Role, 'roleId'>
-    // resourceId: RoleId
-    // TODO: Add other params here
+    updatedResource: Omit<Role, 'roleId'>
+    resourceId: RoleId
 }
 
 export type RoleDeleteApiParams = {
     resourceId: RoleId
-    // TODO: Add other params here
 }

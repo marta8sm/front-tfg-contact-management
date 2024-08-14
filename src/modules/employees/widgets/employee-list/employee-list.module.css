@@ -27,15 +27,15 @@
 }
 
 .search_bar {
-    @apply bg-white sm:w-full sm:max-w-60 w-48 max-w-48 text-black text-center sm:text-start px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
+    @apply bg-white sm:w-full sm:max-w-60 w-48 max-w-48 h-auto text-black text-center sm:text-start px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
 }
 
 .search_form {
-    @apply flex flex-col items-center sm:flex-row gap-4 sm:ml-auto sm:w-96 justify-center sm:justify-end flex-shrink-0;
+    @apply flex flex-col sm:items-stretch items-center sm:flex-row gap-4 sm:ml-auto sm:w-96 justify-center sm:justify-end flex-shrink-0;
 }
 
 .selector {
-    @apply bg-white sm:w-full sm:max-w-28 w-28 max-w-28 text-black justify-center text-center sm:text-start px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
+    @apply bg-white sm:w-full sm:max-w-28 w-28 max-w-28 h-auto text-black justify-center text-center sm:text-start px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
 }
 
 .buttons_no_admin {

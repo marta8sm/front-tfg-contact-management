@@ -159,7 +159,6 @@ export function EmployeeListWidget(props: EmployeeListWidgetProps) {
                             <TableHead>Second lastname</TableHead>
                             <TableHead>Phone</TableHead>
                             <TableHead>Email</TableHead>
-                            <TableHead>Password</TableHead>
                             <TableHead>Role ID</TableHead>
                         </tr>
                     </TableHeader>

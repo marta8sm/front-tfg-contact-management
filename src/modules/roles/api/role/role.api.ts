@@ -11,10 +11,11 @@ import {
 } from './role.types'
 
 export const roleApiProto = (
-    baseUrl: string = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api',
+    baseUrl: string = process.env.NEXT_PUBLIC_API_ENDPOINT || '',
     defaultApiContext = DEFAULT_API_CONTEXT
 ) => {
-    const endpointUrl = `${baseUrl}/role`
+    const endpointUrl = `${baseUrl}/roles`
+    const endpointAdminUrl = `${baseUrl}/admin/roles`
 
     type UrlParams = { resourceId?: RoleId }
     const endpoint = (
@@ -22,11 +23,28 @@ export const roleApiProto = (
         queryParams: Record<string, string>
     ) => {
         const queryParamString = new URLSearchParams(queryParams).toString()
+
+        return `${endpointUrl}?${queryParamString}`
+    }
+    const endpointRole = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
         const resourceIdParam =
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
 
-        // TODO: Customize the endpoint url generation here
         return `${endpointUrl}${resourceIdParam}?${queryParamString}`
+    }
+    const endpointAdmin = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const resourceIdParam =
+            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+
+        return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
     }
 
     return {
@@ -36,11 +54,11 @@ export const roleApiProto = (
         ): Promise<RolePaginatedApiResult> {
             const urlParams: UrlParams = {}
             const queryParams = {
-                // TODO: Map the pagination params as required by the API
-                page: `${page}`,
-                size: `${size}`,
-                // limit: `${size}`,
-                // offset: `${Math.max((page - 1) * size, 0)}`,
+                //page: `${page}`,
+                //size: `${size}`,
+                limit: `${size}`,
+                offset: `${Math.max((page - 1) * size, 0)}`,
+                name,
                 ...otherQueryParams,
             }
             const url = endpoint(urlParams, queryParams)
@@ -60,7 +78,7 @@ export const roleApiProto = (
             { resourceId, ...queryParams }: RoleDeleteApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = { resourceId }
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Deleting Role with id:`,
                 resourceId,
@@ -69,16 +87,14 @@ export const roleApiProto = (
 
             const response = await this.client.delete(url)
 
-            // TODO: Add code handle the response if needed
-
             return response.status >= 200 && response.status < 300
         },
         async create(
             this: ApiContext,
             { newResource, ...queryParams }: RoleCreateApiParams
-        ): Promise<RoleId> {
+        ): Promise<boolean> {
             const urlParams: UrlParams = {}
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `Creating Role resource:`,
                 newResource,
@@ -86,46 +102,22 @@ export const roleApiProto = (
             )
             const response = await this.client.post(url, newResource)
 
-            // TODO: Add code handle the response if needed
-
-            // TODO: Adapt code to handle the receiving of the resourceId (if any)
-            const locationHeader = response.headers.location as
-                | string
-                | undefined
-
-            if (locationHeader) {
-                const segments = new URL(locationHeader).pathname.split('/')
-                const lastIdx = segments.length - 1
-                const resourceId =
-                    segments[lastIdx] || segments[Math.max(lastIdx - 1, 0)]
-                if (!resourceId)
-                    console.warn(new Error('Invalid location header received'))
-                return resourceId as RoleId
-            }
-
-            console.warn(new Error('No location header received'))
-            return '' as RoleId
+            return response.status >= 200 && response.status < 300
         },
         async update(
             this: ApiContext,
-            {
-                updatedResource,
-                // resourceId,
-                ...queryParams
-            }: RoleUpdateApiParams
+            { updatedResource, resourceId, ...queryParams }: RoleUpdateApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = {
-                // resourceId
+                resourceId,
             }
-            const url = endpoint(urlParams, queryParams)
+            const url = endpointAdmin(urlParams, queryParams)
             console.debug(
                 `updating Role resource:`,
                 updatedResource,
                 `on url: ${url}`
             )
             const response = await this.client.put(url, updatedResource)
-
-            // TODO: Add code handle the response if needed
 
             return response.status >= 200 && response.status < 300
         },
@@ -136,16 +128,10 @@ export const roleApiProto = (
             const urlParams: UrlParams = {
                 resourceId,
             }
-            const url = endpoint(urlParams, queryParams)
-            console.debug(
-                `Getting Role with id:`,
-                resourceId,
-                `on url: ${url}`
-            )
+            const url = endpointRole(urlParams, queryParams)
+            console.debug(`Getting Role with id:`, resourceId, `on url: ${url}`)
 
             const response = await this.client.get(url)
-
-            // TODO: Add code handle the response if needed
 
             return response.data as RoleApiResult
         },

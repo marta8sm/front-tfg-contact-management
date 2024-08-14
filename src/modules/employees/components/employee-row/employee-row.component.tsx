@@ -11,7 +11,6 @@ export type EmployeeRowProps = {
     employeeLastName2?: string
     employeePhone: string
     employeeEmail: string
-    employeePassword: string
     roleID?: number
     onClick: () => void //To click on every row of the table
 }
@@ -25,7 +24,6 @@ export function EmployeeRow(props: EmployeeRowProps) {
         employeeLastName2,
         employeePhone,
         employeeEmail,
-        employeePassword,
         roleID,
     } = props
 
@@ -50,7 +48,6 @@ export function EmployeeRow(props: EmployeeRowProps) {
             <TableCell>{employeeLastName2 || ''}</TableCell>
             <TableCell>{employeePhone}</TableCell>
             <TableCell>{employeeEmail}</TableCell>
-            <TableCell>{employeePassword}</TableCell>
             <TableCell>{roleID || ''}</TableCell>
         </TableRow>
     )

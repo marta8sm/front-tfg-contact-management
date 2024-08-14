@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './client-form-update.module.css'
 import { clientApi, ClientId, useClient } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
-import { LoadingButton } from '@/common/components/loading-button'
 
 export type ClientFormWidgetProps = {
     clientId: ClientId
