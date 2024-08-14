@@ -16,6 +16,7 @@ export const employeeApiProto = (
 ) => {
     const endpointUrl = `${baseUrl}/employees`
     const endpointAdminUrl = `${baseUrl}/admin/employees`
+    const endpointRegisterUrl = `${baseUrl}/auth/register`
 
     type UrlParams = { resourceId?: EmployeeId }
     const endpoint = (
@@ -45,6 +46,14 @@ export const employeeApiProto = (
             urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
 
         return `${endpointAdminUrl}${resourceIdParam}?${queryParamString}`
+    }
+    const endpointRegister = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+
+        return `${endpointRegisterUrl}?${queryParamString}`
     }
 
     return {
@@ -94,7 +103,7 @@ export const employeeApiProto = (
             { newResource, ...queryParams }: EmployeeCreateApiParams
         ): Promise<boolean> {
             const urlParams: UrlParams = {}
-            const url = endpointAdmin(urlParams, queryParams)
+            const url = endpointRegister(urlParams, queryParams)
             console.debug(
                 `Creating Employee resource:`,
                 newResource,

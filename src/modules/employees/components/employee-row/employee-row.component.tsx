@@ -12,7 +12,7 @@ export type EmployeeRowProps = {
     employeePhone: string
     employeeEmail: string
     employeePassword: string
-    roleID: number
+    roleID?: number
     onClick: () => void //To click on every row of the table
 }
 
@@ -51,7 +51,7 @@ export function EmployeeRow(props: EmployeeRowProps) {
             <TableCell>{employeePhone}</TableCell>
             <TableCell>{employeeEmail}</TableCell>
             <TableCell>{employeePassword}</TableCell>
-            <TableCell>{roleID}</TableCell>
+            <TableCell>{roleID || ''}</TableCell>
         </TableRow>
     )
 }

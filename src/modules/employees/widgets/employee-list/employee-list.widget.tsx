@@ -76,9 +76,7 @@ export function EmployeeListWidget(props: EmployeeListWidgetProps) {
                 <>
                     <div className={styles.buttons}>
                         <button
-                            onClick={() =>
-                                router.push(`/employees/post-new-employee`)
-                            }
+                            onClick={() => router.push(`/auth/register`)}
                             type="submit"
                             className={styles.create_button}
                         >

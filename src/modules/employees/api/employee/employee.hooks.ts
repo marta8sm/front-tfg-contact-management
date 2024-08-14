@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 import { Pagination } from '@/hookey'
 import { useApiContext } from '@/common/providers/api-context'
 import { employeeApi } from './employee.api'
-import { EmployeeGetApiParams } from './employee.types'
+import { EmployeeGetApiParams, EmployeeListApiParams } from './employee.types'
 
 export const useEmployees = Pagination.makePaginationHook({
     cacheKey: 'employee-api-list',
-    clientFn: employeeApi.list,
+    clientFn: (params: EmployeeListApiParams) => employeeApi.list(params),
     useApiContext: useApiContext,
     getCount: (data) => data.length,
     getPageData: (data) => data,

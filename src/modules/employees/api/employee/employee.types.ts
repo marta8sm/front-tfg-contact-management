@@ -9,7 +9,7 @@ export type Employee = {
     employeePhone: string
     employeeEmail: string
     employeePassword: string
-    roleID: RoleId
+    roleID?: RoleId
 }
 
 export type EmployeeId = number

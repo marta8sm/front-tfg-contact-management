@@ -1,21 +1,19 @@
 import React from 'react'
-import styles from './contact-delete.module.css'
+import styles from './employee-delete.module.css'
+import { employeeApi, EmployeeId, useEmployee } from '@/employees/api/employee'
 import { useRouter } from 'next/navigation'
-import { useContact, contactApi, ContactId } from '@/contacts/api/contact'
 
-export type ContactDeleteWidgetProps = {
-    contactId: ContactId
-    clientId: number
+export type EmployeeDeleteWidgetProps = {
+    employeeId: EmployeeId
     cancel: () => void
 }
 
-export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
+export function EmployeeDeleteWidget(props: EmployeeDeleteWidgetProps) {
     //Hook to redirect
     const router = useRouter()
 
-    const { data, isError, isLoading } = useContact({
-        resourceId: props.contactId,
-        clientId: props.clientId,
+    const { data, isError, isLoading } = useEmployee({
+        resourceId: props.employeeId,
     })
 
     if (isLoading)
@@ -43,9 +41,8 @@ export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
     ) => {
         event.preventDefault()
 
-        const success = await contactApi.delete({
-            resourceId: props.contactId,
-            clientId: props.clientId,
+        const success = await employeeApi.delete({
+            resourceId: props.employeeId,
         })
 
         if (success) {
@@ -54,10 +51,11 @@ export function ContactDeleteWidget(props: ContactDeleteWidgetProps) {
     }
 
     return (
-        <div data-testid="contact-delete-widget" className={styles.container}>
+        <div data-testid="employee-delete-widget" className={styles.container}>
             <div className={styles.delete_div}>
                 <h3 className={styles.question}>
-                    Delete contact {data.contactName} {data.contactLastName1}?
+                    Delete employee {data.employeeName} {data.employeeLastName1}
+                    ?
                 </h3>
             </div>
             <div className={styles.delete_buttons}>
