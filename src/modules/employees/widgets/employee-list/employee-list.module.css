@@ -19,7 +19,7 @@
 }
 
 .buttons {
-    @apply flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 sm:space-y-0 text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 mx-8;
+    @apply flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 sm:space-y-0 text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 sm:container;
 }
 
 .create_button {
@@ -39,7 +39,7 @@
 }
 
 .buttons_no_admin {
-    @apply grid grid-cols-1 sm:grid-cols-6 items-center justify-center text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 mx-8 sm:container;
+    @apply grid grid-cols-1 sm:grid-cols-6 items-center justify-center text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 sm:container;
 }
 
 .search_bar_no_admin {

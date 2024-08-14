@@ -22,7 +22,7 @@
     @apply justify-start align-middle bg-black text-white p-8 md:p-10 rounded;
 
     h4 {
-        @apply p-4;
+        @apply p-4 break-words;
     }
 }
 
