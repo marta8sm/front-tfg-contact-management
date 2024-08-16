@@ -9,10 +9,8 @@ import {
 } from '@/common/components/ui/table'
 import { useContactsOfClient } from '@/contacts/api/contact'
 import { useRouter } from 'next/navigation'
-import { LoadingButton } from '@/common/components/loading-button'
 import { ClientId } from '@/clients/api/client'
 import { useSession } from 'next-auth/react'
-import Link from 'next/link'
 
 export type ContactListOfClientWidgetProps = {
     clientId: ClientId

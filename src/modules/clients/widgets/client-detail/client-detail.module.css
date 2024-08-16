@@ -7,7 +7,7 @@
 }
 
 .title {
-    @apply flex justify-center align-middle sm:p-12 p-8 sm:mb-16 mb-12 font-bold overline md:text-3xl text-2xl uppercase border-b-4 border-blue-700;
+    @apply flex justify-center align-middle text-center sm:p-12 p-8 sm:mb-16 mb-12 font-bold overline md:text-3xl text-2xl uppercase border-b-4 border-blue-700;
 }
 
 .card_container {

@@ -66,6 +66,7 @@ export function ContactFormCreateWidget(props: ContactFormCreateWidgetProps) {
 
         void router.back()
     }
+
     return (
         <div
             data-testid="contact-form-create-widget"

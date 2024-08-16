@@ -1,0 +1,43 @@
+.container {
+    @apply min-h-screen bg-gradient-to-br from-white via-gray-300 to-white pb-16;
+}
+
+.title {
+    @apply flex justify-center align-middle sm:p-12 p-8 font-bold overline sm:text-3xl text-2xl uppercase;
+}
+
+.table_container {
+    @apply mx-8 sm:mx-auto flex justify-center sm:container;
+}
+
+.table_header {
+    @apply bg-blue-600 text-white font-bold;
+}
+
+.table {
+    @apply w-full shadow-md justify-center;
+}
+
+.buttons {
+    @apply grid grid-cols-1 sm:grid-cols-6 items-center justify-center text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 sm:container;
+}
+
+.search_bar {
+    @apply bg-white text-black text-center sm:text-start w-60 sm:w-72 h-auto justify-center px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
+}
+
+.search_form {
+    @apply flex flex-col sm:items-stretch items-center sm:flex-row gap-4 justify-self-center sm:col-start-4 sm:col-span-3;
+}
+
+.date_picker {
+    @apply bg-white sm:w-full sm:max-w-40 w-40 max-w-40 h-auto text-black text-center sm:text-start justify-center px-4 py-2 rounded-md shadow-md border border-black focus:outline-none focus:ring-2 focus:ring-blue-700 cursor-pointer;
+}
+
+/*.date_picker {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-left: 8px;
+    font-size: 14px;
+}*/

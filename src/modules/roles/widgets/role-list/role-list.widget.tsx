@@ -68,7 +68,6 @@ export function RoleListWidget(props: RoleListWidgetProps) {
                         >
                             Create new role
                         </button>
-
                         <form className={styles.search_form}>
                             <input
                                 type="text"

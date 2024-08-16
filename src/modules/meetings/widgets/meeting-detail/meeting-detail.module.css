@@ -27,7 +27,7 @@
 }
 
 .name {
-    @apply flex flex-col items-center justify-center uppercase bg-blue-600 text-white font-bold sm:text-4xl text-3xl p-6 md:p-8 rounded;
+    @apply flex flex-col items-center justify-center text-center uppercase bg-blue-600 text-white font-bold sm:text-4xl text-3xl p-6 md:p-8 rounded;
 }
 
 .buttons {
@@ -52,4 +52,9 @@
 
 .overlay {
     @apply z-50 inset-0 fixed flex justify-center items-center bg-slate-800 bg-opacity-50;
+}
+
+.list {
+    list-style-type: disc;
+    padding-left: 20px;
 }

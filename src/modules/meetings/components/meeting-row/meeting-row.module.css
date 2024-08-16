@@ -1,0 +1,14 @@
+.container {
+}
+
+.avatar {
+    @apply w-10 h-10 uppercase;
+}
+
+.row {
+    @apply cursor-pointer;
+}
+
+.description_cell {
+    @apply overflow-hidden text-ellipsis whitespace-nowrap;
+}
