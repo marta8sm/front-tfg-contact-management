@@ -1,5 +1,5 @@
 import { ClientId } from '@/clients/api/client'
-import { Employee } from '@/employees/api/employee'
+import { Employee, EmployeeId } from '@/employees/api/employee'
 import type { Pagination } from '@/hookey'
 
 export type Meeting = {
@@ -38,6 +38,11 @@ export type MeetingUpdateApiParams = {
     updatedResource: Omit<Omit<Meeting, 'meetingId'>, 'clientId'>
     resourceId: MeetingId
     clientId: ClientId
+}
+
+export type AddEmployeeToMeetingApiParams = {
+    resourceId: MeetingId
+    employeeId: EmployeeId
 }
 
 export type MeetingDeleteApiParams = {

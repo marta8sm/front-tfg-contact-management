@@ -31,6 +31,14 @@ export function MeetingRow(props: MeetingRowProps) {
             : meetingDescription
         : ''
 
+    const convertToHHMM = (time?: string): string => {
+        if (!time) return 'N/A'
+        return time.slice(0, 5)
+    }
+
+    const meetingStartTimeFormatted = convertToHHMM(meetingStartTime)
+    const meetingEndTimeFormatted = convertToHHMM(meetingEndTime)
+
     return (
         <TableRow
             data-testid="meeting-row"
@@ -48,8 +56,8 @@ export function MeetingRow(props: MeetingRowProps) {
                 {truncatedDescription || ''}
             </TableCell>
             <TableCell>{meetingDate}</TableCell>
-            <TableCell>{meetingStartTime || ''}</TableCell>
-            <TableCell>{meetingEndTime || ''}</TableCell>
+            <TableCell>{meetingStartTimeFormatted || ''}</TableCell>
+            <TableCell>{meetingEndTimeFormatted || ''}</TableCell>
             <TableCell>{clientID}</TableCell>
         </TableRow>
     )

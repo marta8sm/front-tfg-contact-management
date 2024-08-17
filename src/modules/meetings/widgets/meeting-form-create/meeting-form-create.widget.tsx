@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './meeting-form-create.module.css'
 import { ClientId } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
@@ -12,8 +12,12 @@ export function MeetingFormCreateWidget(props: MeetingFormCreateWidgetProps) {
     //Hook to redirect
     const router = useRouter()
 
+    const [error, setError] = useState<string | null>(null)
+
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+
+        setError(null)
 
         const meetingDescription = (
             event.currentTarget.elements.namedItem(
@@ -36,6 +40,18 @@ export function MeetingFormCreateWidget(props: MeetingFormCreateWidgetProps) {
             ) as HTMLInputElement
         ).value
 
+        const today = new Date().toISOString().split('T')[0]
+
+        if (meetingDate < today) {
+            setError('The meeting date cannot be in the past.')
+            return
+        }
+
+        if (meetingEndTime <= meetingStartTime) {
+            setError('The meeting end time must be after the start time.')
+            return
+        }
+
         const success = await meetingApi.create({
             newResource: {
                 meetingDescription: meetingDescription,
@@ -47,7 +63,11 @@ export function MeetingFormCreateWidget(props: MeetingFormCreateWidgetProps) {
         })
 
         if (success) {
-            void router.push(`/meetings`)
+            void router.push(`/clients/${props.clientId}/meetings`)
+        } else {
+            setError(
+                'There was an error creating the meeting. Please try again.'
+            )
         }
     }
 

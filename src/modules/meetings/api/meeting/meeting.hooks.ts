@@ -13,7 +13,7 @@ export const useMeetings = Pagination.makePaginationHook({
 })
 
 export const useMeetingsOfClient = Pagination.makePaginationHook({
-    cacheKey: 'contact-of-client-api-list',
+    cacheKey: 'meeting-of-client-api-list',
     clientFn: meetingApi.listByClient,
     useApiContext: useApiContext,
     getCount: (data) => data.length,

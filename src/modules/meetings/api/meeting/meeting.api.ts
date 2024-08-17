@@ -1,5 +1,6 @@
 import { ApiContext, DEFAULT_API_CONTEXT } from '@/common/providers/api-context'
 import {
+    AddEmployeeToMeetingApiParams,
     MeetingApiResult,
     MeetingCreateApiParams,
     MeetingDeleteApiParams,
@@ -10,6 +11,7 @@ import {
     MeetingUpdateApiParams,
 } from './meeting.types'
 import { ClientId } from '@/clients/api/client'
+import { EmployeeId } from '@/employees/api/employee'
 
 export const meetingApiProto = (
     baseUrl: string = process.env.NEXT_PUBLIC_API_ENDPOINT || '/api',
@@ -18,7 +20,11 @@ export const meetingApiProto = (
     const endpointUrl = `${baseUrl}/meetings`
     const endpointUrlClient = `${baseUrl}/clients`
 
-    type UrlParams = { resourceId?: MeetingId; clientId?: ClientId }
+    type UrlParams = {
+        resourceId?: MeetingId
+        clientId?: ClientId
+        employeeId?: EmployeeId
+    }
     const endpoint = (
         urlParams: UrlParams,
         queryParams: Record<string, string>
@@ -56,6 +62,18 @@ export const meetingApiProto = (
             urlParams.clientId === undefined ? '' : `/${urlParams.clientId}`
 
         return `${endpointUrlClient}${clientIdParam}/meetings${resourceIdParam}?${queryParamString}`
+    }
+    const endpointMeetingEmployee = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const resourceIdParam =
+            urlParams.resourceId === undefined ? '' : `/${urlParams.resourceId}`
+        const employeeIdParam =
+            urlParams.employeeId === undefined ? '' : `/${urlParams.employeeId}`
+
+        return `${endpointUrl}${resourceIdParam}/employees${employeeIdParam}?${queryParamString}`
     }
 
     return {
@@ -159,6 +177,27 @@ export const meetingApiProto = (
                 `on url: ${url}`
             )
             const response = await this.client.put(url, updatedResource)
+
+            return response.status >= 200 && response.status < 300
+        },
+        async addEmployeeToMeeting(
+            this: ApiContext,
+            {
+                resourceId,
+                employeeId,
+                ...queryParams
+            }: AddEmployeeToMeetingApiParams
+        ): Promise<boolean> {
+            const urlParams: UrlParams = {
+                resourceId,
+                employeeId,
+            }
+            const url = endpointMeetingEmployee(urlParams, queryParams)
+            console.debug(
+                `adding employee ${employeeId} to meeting ${resourceId} `,
+                `on url: ${url}`
+            )
+            const response = await this.client.put(url)
 
             return response.status >= 200 && response.status < 300
         },

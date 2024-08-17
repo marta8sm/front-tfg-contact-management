@@ -106,13 +106,13 @@ export function MeetingDetailWidget(props: MeetingDetailWidgetProps) {
                 <button
                     onClick={() =>
                         router.push(
-                            `/clients/${data.clientID}/meetings/${data.meetingID}/update-meeting`
+                            `/clients/${data.clientID}/meetings/${data.meetingID}/add-employee`
                         )
                     }
                     type="submit"
-                    className={styles.meetings_button}
+                    className={styles.add_employees_button}
                 >
-                    See meetings
+                    Add employee to meeting
                 </button>
                 <button
                     onClick={() =>

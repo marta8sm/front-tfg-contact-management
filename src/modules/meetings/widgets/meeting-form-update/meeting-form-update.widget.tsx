@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './meeting-form-update.module.css'
 import { meetingApi, MeetingId, useMeeting } from '@/meetings/api/meeting'
 import { ClientId } from '@/clients/api/client'
@@ -12,6 +12,8 @@ export type MeetingFormUpdateWidgetProps = {
 export function MeetingFormUpdateWidget(props: MeetingFormUpdateWidgetProps) {
     //Hook to redirect
     const router = useRouter()
+
+    const [error, setError] = useState<string | null>(null)
 
     const { data, isError, isLoading } = useMeeting({
         resourceId: props.meetingId,
@@ -45,6 +47,8 @@ export function MeetingFormUpdateWidget(props: MeetingFormUpdateWidgetProps) {
     const submit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
+        setError(null)
+
         const meetingDescription = (
             event.currentTarget.elements.namedItem(
                 'meetingDescription'
@@ -66,6 +70,18 @@ export function MeetingFormUpdateWidget(props: MeetingFormUpdateWidgetProps) {
             ) as HTMLInputElement
         ).value
 
+        const today = new Date().toISOString().split('T')[0]
+
+        if (meetingDate < today) {
+            setError('The meeting date cannot be in the past.')
+            return
+        }
+
+        if (meetingEndTime <= meetingStartTime) {
+            setError('The meeting end time must be after the start time.')
+            return
+        }
+
         const meetingStartTimeFormatted = convertToHHMM(meetingStartTime)
         const meetingEndTimeFormatted = convertToHHMM(meetingEndTime)
 
@@ -83,6 +99,10 @@ export function MeetingFormUpdateWidget(props: MeetingFormUpdateWidgetProps) {
         if (success) {
             void router.push(
                 `/clients/${props.clientId}/meetings/${props.meetingId}`
+            )
+        } else {
+            setError(
+                'There was an error creating the meeting. Please try again.'
             )
         }
     }

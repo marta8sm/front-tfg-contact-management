@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import styles from './meeting-list.module.css'
+import React, { useState } from 'react'
+import styles from './meeting-list-of-client.module.css'
+import { ClientId } from '@/clients/api/client'
+import { useRouter } from 'next/navigation'
+import { useMeetingsOfClient } from '@/meetings/api/meeting'
+import DatePicker from 'react-datepicker'
 import {
     TableRoot,
     TableHeader,
-    TableBody,
     TableHead,
+    TableBody,
 } from '@/common/components/ui/table'
-import { useRouter } from 'next/navigation'
-import { useMeetings } from '@/meetings/api/meeting'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
 import { MeetingRow } from '@/meetings/components/meeting-row'
 
-export type MeetingListWidgetProps = {}
+export type MeetingListOfClientWidgetProps = {
+    clientId: ClientId
+}
 
-export function MeetingListWidget(props: MeetingListWidgetProps) {
+export function MeetingListOfClientWidget(
+    props: MeetingListOfClientWidgetProps
+) {
     //Hook to redirect
     const router = useRouter()
 
@@ -32,15 +36,14 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
         }
     }
 
-    const { data, isError, isLoading } = useMeetings({
+    const { clientId } = props
+
+    const { data, isError, isLoading } = useMeetingsOfClient({
         size: 10,
+        clientId,
         description: searchParam,
         date: dateParam ? dateParam.toISOString().split('T')[0] : '',
     })
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [searchParam])
 
     if (isLoading)
         return (
@@ -62,24 +65,33 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
             </div>
         )
 
-    /*const filterDateDescription = data.filter((meeting) => {
-        const matchDescription = meeting.meetingDescription
-            .toLowerCase()
-            .includes(searchParam.toLowerCase())
-
-        const matchDate = dateParam
-            ? dateParam.toISOString().split('T')[0] === meeting.meetingDate
-            : true
-
-        return matchDescription && matchDate
-    })*/
-
     return (
-        <div data-testid="meeting-list-widget" className={styles.container}>
+        <div
+            data-testid="meeting-list-of-client-widget"
+            className={styles.container}
+        >
             <div className={styles.title}>
-                <h1>MEETINGS</h1>
+                <h1>MEETINGS OF CLIENT {clientId}</h1>
             </div>
             <div className={styles.buttons}>
+                <button
+                    onClick={() => router.back()}
+                    type="button"
+                    className={styles.goback_button}
+                >
+                    &lt;&lt; Go back
+                </button>
+                <button
+                    onClick={() =>
+                        router.push(
+                            `/clients/${clientId}/meetings/post-new-meeting`
+                        )
+                    }
+                    type="submit"
+                    className={styles.create_button}
+                >
+                    Create meeting
+                </button>
                 <form className={styles.search_form}>
                     <input
                         type="text"

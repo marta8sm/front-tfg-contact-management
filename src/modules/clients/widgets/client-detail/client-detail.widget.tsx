@@ -75,12 +75,32 @@ export function ClientDetailWidget(props: ClientDetailWidgetProps) {
             <div className={styles.buttons}>
                 <button
                     onClick={() =>
+                        router.push(`/clients/${data.clientID}/meetings`)
+                    }
+                    type="submit"
+                    className={styles.contacts_button}
+                >
+                    See meetings
+                </button>
+                <button
+                    onClick={() =>
                         router.push(`/clients/${data.clientID}/contacts`)
                     }
                     type="submit"
                     className={styles.contacts_button}
                 >
                     See contacts
+                </button>
+                <button
+                    onClick={() =>
+                        router.push(
+                            `/clients/${data.clientID}/meetings/post-new-meeting`
+                        )
+                    }
+                    type="submit"
+                    className={styles.create_button}
+                >
+                    Create meeting
                 </button>
                 {isAdmin && (
                     <>

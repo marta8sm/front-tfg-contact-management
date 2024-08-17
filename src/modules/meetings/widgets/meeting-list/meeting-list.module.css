@@ -19,19 +19,19 @@
 }
 
 .buttons {
-    @apply grid grid-cols-1 sm:grid-cols-6 items-center justify-center text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 sm:container;
+    @apply grid grid-cols-1 md:grid-cols-6 items-center justify-center text-sm md:text-base font-medium px-10 lg:px-14 pb-8 lg:pb-10 sm:container;
 }
 
 .search_bar {
-    @apply bg-white text-black text-center sm:text-start w-60 sm:w-72 h-auto justify-center px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
+    @apply bg-white text-black text-center md:text-start w-60 md:w-full md:max-w-64 h-auto justify-center px-4 py-2 rounded-md shadow-md border border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-700;
 }
 
 .search_form {
-    @apply flex flex-col sm:items-stretch items-center sm:flex-row gap-4 justify-self-center sm:col-start-4 sm:col-span-3;
+    @apply flex flex-col md:items-stretch items-center md:flex-row gap-4 justify-self-center md:col-start-4 md:col-span-3;
 }
 
 .date_picker {
-    @apply bg-white sm:w-full sm:max-w-40 w-40 max-w-40 h-auto text-black text-center sm:text-start justify-center px-4 py-2 rounded-md shadow-md border border-black focus:outline-none focus:ring-2 focus:ring-blue-700 cursor-pointer;
+    @apply bg-white md:w-40 md:max-w-44 w-40 max-w-64 h-auto text-black text-center md:text-start justify-center px-4 py-2 rounded-md shadow-md border border-black focus:outline-none focus:ring-2 focus:ring-blue-700 cursor-pointer;
 }
 
 /*.date_picker {
