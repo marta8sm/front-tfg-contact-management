@@ -4,6 +4,7 @@ import { EmployeeId, useEmployee } from '@/employees/api/employee'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { EmployeeDeleteWidget } from '../employee-delete'
+import { useMeetingsOfEmployee } from '@/meetings/api/meeting'
 
 export type EmployeeDetailWidgetProps = {
     employeeId: EmployeeId
@@ -20,6 +21,14 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
     const { data, isError, isLoading } = useEmployee({
         resourceId: props.employeeId,
     })
+
+    const { data: meetingsData, isLoading: meetingsLoading } =
+        useMeetingsOfEmployee({
+            size: 10,
+            employeeId: props.employeeId,
+        })
+
+    const hasMeetings = meetingsData && meetingsData.length > 0
 
     const [showDeleteWidget, setShowDeleteWidget] = useState(false)
 
@@ -88,17 +97,27 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <button
-                    onClick={() =>
-                        router.push(
-                            `/employees/${data.employeeID}/update-employee`
-                        )
-                    }
-                    type="submit"
-                    className={styles.meetings_button}
-                >
-                    See meetings
-                </button>
+                {hasMeetings ? (
+                    <button
+                        onClick={() =>
+                            router.push(
+                                `/meetings/employees/${data.employeeID}`
+                            )
+                        }
+                        type="submit"
+                        className={styles.meetings_button}
+                    >
+                        See meetings
+                    </button>
+                ) : (
+                    <button
+                        type="button"
+                        className={styles.no_meetings_button}
+                        disabled
+                    >
+                        No meetings
+                    </button>
+                )}
                 {isAdmin && (
                     <>
                         <button

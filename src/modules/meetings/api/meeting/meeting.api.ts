@@ -1,6 +1,7 @@
 import { ApiContext, DEFAULT_API_CONTEXT } from '@/common/providers/api-context'
 import {
     AddEmployeeToMeetingApiParams,
+    DeleteEmployeeFromMeetingApiParams,
     MeetingApiResult,
     MeetingCreateApiParams,
     MeetingDeleteApiParams,
@@ -75,6 +76,16 @@ export const meetingApiProto = (
 
         return `${endpointUrl}${resourceIdParam}/employees${employeeIdParam}?${queryParamString}`
     }
+    const endpointMeetingsOfEmployee = (
+        urlParams: UrlParams,
+        queryParams: Record<string, string>
+    ) => {
+        const queryParamString = new URLSearchParams(queryParams).toString()
+        const employeeIdParam =
+            urlParams.employeeId === undefined ? '' : `/${urlParams.employeeId}`
+
+        return `${endpointUrl}/employees${employeeIdParam}?${queryParamString}`
+    }
 
     return {
         async list(
@@ -126,6 +137,36 @@ export const meetingApiProto = (
 
             return response.data as MeetingPaginatedApiResult
         },
+        async listMeetingsOfEmployee(
+            this: ApiContext,
+            {
+                page,
+                size,
+                employeeId,
+                ...otherQueryParams
+            }: MeetingListApiParams
+        ): Promise<MeetingPaginatedApiResult> {
+            const urlParams: UrlParams = { employeeId }
+            const queryParams = {
+                //page: `${page}`,
+                //size: `${size}`,
+                limit: `${size}`,
+                offset: `${Math.max((page - 1) * size, 0)}`,
+                name,
+                ...otherQueryParams,
+            }
+            const url = endpointMeetingsOfEmployee(urlParams, queryParams)
+            console.debug(
+                `Listing Meeting with page: ${page}, size: ${size}`,
+                `on url: ${url}`
+            )
+
+            const response = await this.client.get(url)
+
+            // TODO: Add code handle the response if needed
+
+            return response.data as MeetingPaginatedApiResult
+        },
         async delete(
             this: ApiContext,
             { resourceId, clientId, ...queryParams }: MeetingDeleteApiParams
@@ -134,6 +175,28 @@ export const meetingApiProto = (
             const url = endpointMeeting(urlParams, queryParams)
             console.debug(
                 `Deleting Meeting with id:`,
+                resourceId,
+                `on url: ${url}`
+            )
+
+            const response = await this.client.delete(url)
+
+            return response.status >= 200 && response.status < 300
+        },
+        async deleteEmployeeFromMeeting(
+            this: ApiContext,
+            {
+                resourceId,
+                employeeId,
+                ...queryParams
+            }: DeleteEmployeeFromMeetingApiParams
+        ): Promise<boolean> {
+            const urlParams: UrlParams = { resourceId, employeeId }
+            const url = endpointMeetingEmployee(urlParams, queryParams)
+            console.debug(
+                `Deleting employee `,
+                employeeId,
+                ` from Meeting with id:`,
                 resourceId,
                 `on url: ${url}`
             )

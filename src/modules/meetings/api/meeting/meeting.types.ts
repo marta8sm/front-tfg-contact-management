@@ -22,6 +22,7 @@ export type MeetingListApiParams = Pagination.UsePaginatedQueryParams<{
     date?: string
     description?: string
     clientId?: ClientId
+    employeeId?: EmployeeId
 }>
 
 export type MeetingGetApiParams = {
@@ -48,4 +49,9 @@ export type AddEmployeeToMeetingApiParams = {
 export type MeetingDeleteApiParams = {
     resourceId: MeetingId
     clientId: ClientId
+}
+
+export type DeleteEmployeeFromMeetingApiParams = {
+    resourceId: MeetingId
+    employeeId: EmployeeId
 }
