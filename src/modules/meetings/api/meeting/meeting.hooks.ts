@@ -1,9 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Pagination } from '@/hookey'
 import { useApiContext } from '@/common/providers/api-context'
 import { meetingApi } from './meeting.api'
-import { MeetingGetApiParams, MeetingListApiParams } from './meeting.types'
-import { EmployeeId } from '@/employees/api/employee'
+import {
+    DeleteEmployeeFromMeetingApiParams,
+    MeetingGetApiParams,
+} from './meeting.types'
 
 export const useMeetings = Pagination.makePaginationHook({
     cacheKey: 'meeting-api-list',
@@ -34,4 +36,12 @@ export const useMeeting = (params: MeetingGetApiParams) => {
         ['meeting-api-get', params] as [string, typeof params],
         ({ queryKey: [_key, params] }) => meetingApi.get(params)
     )
+}
+
+export const useDeleteEmployeeFromMeeting = () => {
+    const apiContext = useApiContext()
+
+    return useMutation((params: DeleteEmployeeFromMeetingApiParams) => {
+        return meetingApi.deleteEmployeeFromMeeting.call(apiContext, params)
+    })
 }

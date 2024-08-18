@@ -24,7 +24,7 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
 
     const { data: meetingsData, isLoading: meetingsLoading } =
         useMeetingsOfEmployee({
-            size: 10,
+            size: 100,
             employeeId: props.employeeId,
         })
 

@@ -36,7 +36,7 @@ export function MeetingsOfEmployeeWidget(props: MeetingsOfEmployeeWidgetProps) {
     const { employeeId } = props
 
     const { data, isError, isLoading } = useMeetingsOfEmployee({
-        size: 10,
+        size: 100,
         employeeId,
         description: searchParam,
         date: dateParam ? dateParam.toISOString().split('T')[0] : '',

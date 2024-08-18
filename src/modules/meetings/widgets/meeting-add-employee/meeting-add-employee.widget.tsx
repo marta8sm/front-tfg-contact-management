@@ -82,9 +82,9 @@ export function MeetingAddEmployeeWidget(props: MeetingAddEmployeeWidgetProps) {
 
         if (success) {
             alert('Employee added successfully!')
-            router.push(
+            /*router.push(
                 `/clients/${props.clientId}/meetings/${props.meetingId}`
-            )
+            )*/
         } else {
             alert('Failed to add employee to meeting. Please try again.')
         }
@@ -93,9 +93,7 @@ export function MeetingAddEmployeeWidget(props: MeetingAddEmployeeWidgetProps) {
     const cancel = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
 
-        void router.push(
-            `/clients/${props.clientId}/meetings/${props.meetingId}`
-        )
+        void router.back()
     }
 
     return (
@@ -140,13 +138,9 @@ export function MeetingAddEmployeeWidget(props: MeetingAddEmployeeWidgetProps) {
                         <button
                             type="button"
                             className={styles.cancel_button}
-                            onClick={() =>
-                                router.push(
-                                    `/clients/${props.clientId}/meetings/${props.meetingId}`
-                                )
-                            }
+                            onClick={cancel}
                         >
-                            Cancel
+                            Go back
                         </button>
                     </div>
                 </form>

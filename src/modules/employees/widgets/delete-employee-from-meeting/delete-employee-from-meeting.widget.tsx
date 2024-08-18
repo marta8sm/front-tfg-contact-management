@@ -1,14 +1,18 @@
 import React from 'react'
-import styles from './employee-delete.module.css'
-import { employeeApi, EmployeeId, useEmployee } from '@/employees/api/employee'
+import styles from './delete-employee-from-meeting.module.css'
+import { EmployeeId, useEmployee } from '@/employees/api/employee'
 import { useRouter } from 'next/navigation'
+import { meetingApi, MeetingId } from '@/meetings/api/meeting'
 
-export type EmployeeDeleteWidgetProps = {
+export type DeleteEmployeeFromMeetingWidgetProps = {
     employeeId: EmployeeId
+    meetingId: MeetingId
     cancel: () => void
 }
 
-export function EmployeeDeleteWidget(props: EmployeeDeleteWidgetProps) {
+export function DeleteEmployeeFromMeetingWidget(
+    props: DeleteEmployeeFromMeetingWidgetProps
+) {
     //Hook to redirect
     const router = useRouter()
 
@@ -41,21 +45,25 @@ export function EmployeeDeleteWidget(props: EmployeeDeleteWidgetProps) {
     ) => {
         event.preventDefault()
 
-        const success = await employeeApi.delete({
-            resourceId: props.employeeId,
+        const success = await meetingApi.deleteEmployeeFromMeeting({
+            resourceId: props.meetingId,
+            employeeId: props.employeeId,
         })
 
-        /*if (success) {
-            void router.back()
-        }*/
+        if (success) {
+            void router.refresh()
+        }
     }
 
     return (
-        <div data-testid="employee-delete-widget" className={styles.container}>
+        <div
+            data-testid="delete-employee-from-meeting-widget"
+            className={styles.container}
+        >
             <div className={styles.delete_div}>
                 <h3 className={styles.question}>
-                    Delete employee {data.employeeName} {data.employeeLastName1}
-                    ?
+                    Delete employee {data.employeeName} {data.employeeLastName1}{' '}
+                    from this meeting?
                 </h3>
             </div>
             <div className={styles.delete_buttons}>

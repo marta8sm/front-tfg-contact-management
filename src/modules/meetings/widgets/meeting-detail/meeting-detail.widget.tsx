@@ -117,6 +117,17 @@ export function MeetingDetailWidget(props: MeetingDetailWidgetProps) {
                 <button
                     onClick={() =>
                         router.push(
+                            `/clients/${data.clientID}/meetings/${data.meetingID}/delete-employee`
+                        )
+                    }
+                    type="submit"
+                    className={styles.delete_employees_button}
+                >
+                    Delete employee from meeting
+                </button>
+                <button
+                    onClick={() =>
+                        router.push(
                             `/clients/${data.clientID}/meetings/${data.meetingID}/update-meeting`
                         )
                     }
