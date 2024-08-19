@@ -35,16 +35,16 @@ export function FooterWidget(props: FooterWidgetProps) {
                     </Link>
                 </div>
                 <div className={styles.menu_item}>
-                    <Link href="/https://www.axpe.com/contacto/">
+                    <Link href="https://www.axpe.com/contacto/">
                         <h3 className={styles.menu_routes}>
                             Contact us (Axpe)
                         </h3>
                     </Link>
                 </div>
                 <div className={styles.menu_item}>
-                    <Link href="/https://www.uxcale.com/contacto/">
+                    <Link href="https://www.uxcale.com/contacto/">
                         <h3 className={styles.menu_routes}>
-                            Contact Us (Uxcale)
+                            Contact us (Uxcale)
                         </h3>
                     </Link>
                 </div>
