@@ -3,7 +3,6 @@ import styles from './meeting-detail.module.css'
 import { MeetingId, useMeeting } from '@/meetings/api/meeting'
 import { ClientId } from '@/clients/api/client'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
 import { MeetingDeleteWidget } from '../meeting-delete'
 
 export type MeetingDetailWidgetProps = {
@@ -16,8 +15,8 @@ export function MeetingDetailWidget(props: MeetingDetailWidgetProps) {
     const router = useRouter()
 
     //Role control
-    const { data: session } = useSession()
-    const isAdmin = session?.user?.roleId === 1
+    //const { data: session } = useSession()
+    //const isAdmin = session?.user?.roleId === 1
 
     const { data, isError, isLoading } = useMeeting({
         resourceId: props.meetingId,
@@ -112,18 +111,7 @@ export function MeetingDetailWidget(props: MeetingDetailWidgetProps) {
                     type="submit"
                     className={styles.add_employees_button}
                 >
-                    Add employee to meeting
-                </button>
-                <button
-                    onClick={() =>
-                        router.push(
-                            `/clients/${data.clientID}/meetings/${data.meetingID}/delete-employee`
-                        )
-                    }
-                    type="submit"
-                    className={styles.delete_employees_button}
-                >
-                    Delete employee from meeting
+                    Add employee
                 </button>
                 <button
                     onClick={() =>
@@ -135,6 +123,17 @@ export function MeetingDetailWidget(props: MeetingDetailWidgetProps) {
                     className={styles.update_button}
                 >
                     Update
+                </button>
+                <button
+                    onClick={() =>
+                        router.push(
+                            `/clients/${data.clientID}/meetings/${data.meetingID}/delete-employee`
+                        )
+                    }
+                    type="submit"
+                    className={styles.delete_employees_button}
+                >
+                    Delete employee
                 </button>
                 <button
                     onClick={() => setShowDeleteWidget(true)}

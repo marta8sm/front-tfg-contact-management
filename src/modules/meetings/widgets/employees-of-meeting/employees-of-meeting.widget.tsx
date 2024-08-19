@@ -108,7 +108,6 @@ export function EmployeesOfMeetingWidget(props: EmployeesOfMeetingWidgetProps) {
                         <DeleteEmployeeFromMeetingWidget
                             employeeId={selectedEmployeeId}
                             meetingId={meetingID}
-                            submit={() => setShowDeleteWidget(false)}
                             cancel={() => setShowDeleteWidget(false)}
                         />
                     </div>

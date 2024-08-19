@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './meeting-list.module.css'
 import {
     TableRoot,
@@ -38,10 +38,6 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
         date: dateParam ? dateParam.toISOString().split('T')[0] : '',
     })
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [searchParam])
-
     if (isLoading)
         return (
             <div id="loading_div">
@@ -62,7 +58,7 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
             </div>
         )
 
-    /*const filterDateDescription = data.filter((meeting) => {
+    const filterDateDescription = data.filter((meeting) => {
         const matchDescription = meeting.meetingDescription
             .toLowerCase()
             .includes(searchParam.toLowerCase())
@@ -72,7 +68,7 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
             : true
 
         return matchDescription && matchDate
-    })*/
+    })
 
     return (
         <div data-testid="meeting-list-widget" className={styles.container}>
@@ -115,7 +111,7 @@ export function MeetingListWidget(props: MeetingListWidgetProps) {
                         </tr>
                     </TableHeader>
                     <TableBody>
-                        {data.map((meeting) => (
+                        {filterDateDescription.map((meeting) => (
                             <MeetingRow
                                 key={meeting.meetingID}
                                 {...meeting}

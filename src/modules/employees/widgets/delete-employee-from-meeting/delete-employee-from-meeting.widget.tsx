@@ -51,7 +51,8 @@ export function DeleteEmployeeFromMeetingWidget(
         })
 
         if (success) {
-            void router.refresh()
+            props.cancel()
+            void router.back()
         }
     }
 

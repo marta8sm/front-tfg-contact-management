@@ -12,8 +12,8 @@ export function FooterWidget(props: FooterWidgetProps) {
                     <Image
                         src="/logo-white.png"
                         alt="Logo"
-                        width={180}
-                        height={84}
+                        width={135}
+                        height={63}
                         className={styles.image_size_big}
                     />
                     <Image
@@ -31,32 +31,26 @@ export function FooterWidget(props: FooterWidgetProps) {
             <div className={styles.navbar}>
                 <div className={styles.menu_item}>
                     <Link href="/">
-                        <h3 className={styles.menu_routes}>HOME</h3>
+                        <h3 className={styles.menu_routes}>Home</h3>
                     </Link>
                 </div>
                 <div className={styles.menu_item}>
-                    <Link href="/clients">
-                        <h3 className={styles.menu_routes}>CLIENTS</h3>
+                    <Link href="/https://www.axpe.com/contacto/">
+                        <h3 className={styles.menu_routes}>
+                            Contact us (Axpe)
+                        </h3>
                     </Link>
                 </div>
                 <div className={styles.menu_item}>
-                    <Link href="/contacts">
-                        <h3 className={styles.menu_routes}>CONTACTS</h3>
+                    <Link href="/https://www.uxcale.com/contacto/">
+                        <h3 className={styles.menu_routes}>
+                            Contact Us (Uxcale)
+                        </h3>
                     </Link>
                 </div>
                 <div className={styles.menu_item}>
-                    <Link href="/employees">
-                        <h3 className={styles.menu_routes}>EMPLOYEES</h3>
-                    </Link>
-                </div>
-                <div className={styles.menu_item}>
-                    <Link href="/meetings">
-                        <h3 className={styles.menu_routes}>MEETINGS</h3>
-                    </Link>
-                </div>
-                <div className={styles.menu_item}>
-                    <Link href="/roles">
-                        <h3 className={styles.menu_routes}>ROLES</h3>
+                    <Link href="https://www.axpe.com/politica-de-privacidad/">
+                        <h3 className={styles.menu_routes}>Privacy policy</h3>
                     </Link>
                 </div>
             </div>

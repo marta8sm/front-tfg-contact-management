@@ -62,7 +62,10 @@ export function AuthForm({ className, onSubmit, ...props }: AuthFormProps) {
                         render={({ field }) => (
                             <Form.Item>
                                 <Form.Label>Username</Form.Label>
-                                <Form.Input placeholder="pibone" {...field} />
+                                <Form.Input
+                                    placeholder="user@uxcale.com"
+                                    {...field}
+                                />
                                 <Form.Message />
                             </Form.Item>
                         )}

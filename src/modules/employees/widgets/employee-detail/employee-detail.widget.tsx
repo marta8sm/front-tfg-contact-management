@@ -32,7 +32,7 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
 
     const [showDeleteWidget, setShowDeleteWidget] = useState(false)
 
-    if (isLoading)
+    if (isLoading || meetingsLoading)
         return (
             <div id="loading_div">
                 <div id="loader">
@@ -51,6 +51,8 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
                 </div>
             </div>
         )
+
+    const isEmployeeId = session?.user?.id === data.employeeEmail
 
     return (
         <div data-testid="employee-detail-widget" className={styles.container}>
@@ -87,9 +89,13 @@ export function EmployeeDetailWidget(props: EmployeeDetailWidgetProps) {
                         <h4>
                             <b>Email:</b> {data.employeeEmail}
                         </h4>
-                        <h4>
-                            <b>Password:</b> {data.employeePassword}
-                        </h4>
+                        {(isAdmin || isEmployeeId) && (
+                            <>
+                                <h4>
+                                    <b>Password:</b> {data.employeePassword}
+                                </h4>
+                            </>
+                        )}
                         <h4>
                             <b>Role ID:</b> {data.roleID}
                         </h4>
