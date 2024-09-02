@@ -29,6 +29,10 @@ export function AuthForm({ className, onSubmit, ...props }: AuthFormProps) {
                 message: 'Password must contain at least 8 characters',
             }),
         }),
+        defaultValues: {
+            employeeEmail: '',
+            employeePassword: '',
+        },
         onSubmit: async (data) => {
             try {
                 const error = await onSubmit(data)

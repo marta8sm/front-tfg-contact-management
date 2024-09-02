@@ -22,6 +22,7 @@ export const LoggedIn: Story = {
                     name: 'Dani Peña Iglesias',
                     image: 'https://github.com/pibone.png',
                 },
+                expires: '',
             }}
         >
             <AccountWidget {...p} />

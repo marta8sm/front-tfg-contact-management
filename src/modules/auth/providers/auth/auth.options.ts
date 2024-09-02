@@ -1,5 +1,5 @@
 import { getApiContext } from '@/common/providers/api-context/api-context.default'
-import { AuthOptions, Role, role, User } from 'next-auth'
+import { AuthOptions, Role, User } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
 export const authOptions: AuthOptions = {
@@ -11,22 +11,25 @@ export const authOptions: AuthOptions = {
     },
     callbacks: {
         async session({ session, token }) {
-            if (token?.accessToken && session) {
+            if (token?.apiSession && session) {
                 // Update server side API_CONTEXT
-                getApiContext().setAuthorizationToken(token.accessToken)
+                getApiContext().setAuthorizationToken(
+                    token.apiSession.accessToken
+                )
                 session.apiSession = {
-                    accessToken: token.accessToken,
-                    refreshToken: token.refreshToken,
+                    accessToken: token.apiSession.accessToken,
+                    refreshToken: token.apiSession.refreshToken,
                 }
-                session.user = token.user
-                session.user.roleId = token.user.roleId
+                session.user = token?.user
+                //session.user.roleId = token.user.roleId
             }
             return session
         },
         async jwt({ token, user }) {
             if (user?.apiSession) {
-                token.accessToken = user.apiSession.accessToken
-                token.refreshToken = user.apiSession.refreshToken
+                //token.accessToken = user.apiSession.accessToken
+                //token.refreshToken = user.apiSession.refreshToken
+                token.apiSession = user.apiSession
                 token.user = user
             }
             return token

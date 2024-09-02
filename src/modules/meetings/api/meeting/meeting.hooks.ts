@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { Pagination } from '@/hookey'
 import { useApiContext } from '@/common/providers/api-context'
 import { meetingApi } from './meeting.api'

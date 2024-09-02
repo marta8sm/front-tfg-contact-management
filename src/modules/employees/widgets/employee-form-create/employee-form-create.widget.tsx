@@ -179,7 +179,7 @@ export function EmployeeFormCreateWidget(props: EmployeeFormCreateWidgetProps) {
                     </div>
                     <div>
                         <label id="roleId" className={styles.form_label}>
-                            Role ID
+                            Role ID *
                         </label>
                         <input
                             type="number"

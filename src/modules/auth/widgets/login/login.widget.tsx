@@ -7,7 +7,7 @@ import styles from './login.module.css'
 export type LoginWidgetProps = {}
 
 export function LoginWidget(props: LoginWidgetProps) {
-    const router = useRouter()
+    //const router = useRouter()
     const searchParams = useSearchParams()
     const callbackUrl = searchParams.get('callbackUrl') || '/profile'
     return (
@@ -17,7 +17,6 @@ export function LoginWidget(props: LoginWidgetProps) {
                     const result = await signIn('credentials', {
                         redirect: false,
                         ...credentials,
-                        callbackUrl,
                     })
 
                     console.debug('Login result:', result)
@@ -25,8 +24,7 @@ export function LoginWidget(props: LoginWidgetProps) {
                     if (result?.error === 'CredentialsSignin') {
                         return 'Invalid credentials'
                     }
-
-                    router.replace(callbackUrl)
+                    window.location.href = callbackUrl
                 }}
             />
         </div>

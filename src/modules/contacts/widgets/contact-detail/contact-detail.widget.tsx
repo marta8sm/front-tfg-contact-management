@@ -87,18 +87,6 @@ export function ContactDetailWidget(props: ContactDetailWidgetProps) {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <button
-                    onClick={() =>
-                        //cambiar cuando se haga
-                        router.push(
-                            `/clients/${data.clientID}/contacts/${data.contactID}/update-contact`
-                        )
-                    }
-                    type="submit"
-                    className={styles.meetings_button}
-                >
-                    See meetings
-                </button>
                 {isAdmin && (
                     <>
                         <button

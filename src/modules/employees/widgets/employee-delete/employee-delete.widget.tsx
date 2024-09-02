@@ -45,9 +45,9 @@ export function EmployeeDeleteWidget(props: EmployeeDeleteWidgetProps) {
             resourceId: props.employeeId,
         })
 
-        /*if (success) {
+        if (success) {
             void router.back()
-        }*/
+        }
     }
 
     return (
