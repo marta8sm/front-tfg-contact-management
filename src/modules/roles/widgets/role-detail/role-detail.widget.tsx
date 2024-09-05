@@ -68,13 +68,6 @@ export function RoleDetailWidget(props: RoleDetailWidgetProps) {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <button
-                    onClick={() => router.push(`/roles`)}
-                    type="submit"
-                    className={styles.contacts_button}
-                >
-                    See contacts
-                </button>
                 {isAdmin && (
                     <>
                         <button
